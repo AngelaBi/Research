@@ -1,7 +1,11 @@
 TO RUN On the farm:
 -------------------
 
-setenv ROOT_VERSION 5.34.36
-source /site/12gev_phys/softenv.csh 2.1 keepmine
+This is a slight modification of the code by M. Ungaro
 
+https://github.com/maureeungaro/analysis/tree/master/gemc/dc_rates
+
+This version was modified to work in root 6
+to run change the name of the input file in rates.C and run as 
+.x rates.C
 
