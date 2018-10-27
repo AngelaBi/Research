@@ -7,8 +7,8 @@ void print_all()
 		SECT = s;
 		CONF = 0;
 		show_dc_occ();
-		CONF = 1;
-		show_dc_occ();
+//		CONF = 1;
+//		show_dc_occ();
 	}
 	PRINT = "";
 

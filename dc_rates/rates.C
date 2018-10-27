@@ -105,7 +105,7 @@
 	
   string filename;
 	for(int c=0; c<NCONF; c++){
-    filename="/Users/biselli/Data/clas12/dc_occ_studies/out_pol_noshift.root";
+    filename="/Users/biselli/Data/clas12/dc_occ_studies/out.root";
     //filename+=sconf[c].c_str();
 		//init_dc_histos(Form("/volatile/clas12/ungaro/clas12/root/%s.root", sconf[c].c_str()), c);
     init_dc_histos(filename, c);
@@ -135,7 +135,7 @@
 
 	// to print all pics, uncomment the lines below and run root
 	// in batch mode: root -b -q rates.C
-	//print_all();
+	print_all();
 
 
 }
