@@ -123,17 +123,17 @@ int found1=0;
 
 for (int n=0; n<=100;n++){
 	double h= h1p4.getBinContent(n);
-	System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+	//System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
 	if( halfmax1-(halfmax1*0.1) <= h && h <= halfmax1+(halfmax1*0.1) ){
 		if(found1==0){
 			xp1=n;
 			found1=1;
-			System.out.println("xp1= "+xp1+" and: "+h1p4.getAxis().getBinCenter(xp1));	
+			//System.out.println("xp1= "+xp1+" and: "+h1p4.getAxis().getBinCenter(xp1));	
 		}
 		else if(found1==1){
 			xp2=n;
 			found1=1;
-			System.out.println("xp2= "+xp2+" and: "+h1p4.getAxis().getBinCenter(xp2));
+			//System.out.println("xp2= "+xp2+" and: "+h1p4.getAxis().getBinCenter(xp2));
 		}
 		else{
 			System.out.println("Check Script");	
@@ -173,7 +173,7 @@ f1p5.setLineColor(0);
 //f1p5.setParameter(4, 0.0);
 DataFitter.fit(f1p5,h1p5,"LQ");
 
-double halfmax2= h1p5.getBinContent(h1p5.getMaximumBin())/2+h1p5.getBinContent(h1p5.getMaximumBin())/4;
+double halfmax2= h1p5.getBinContent(h1p5.getMaximumBin())/2;
 //System.out.println("halfmax2= "+halfmax2);
 
 int xn1=1000;
@@ -182,17 +182,17 @@ int found2=0;
 
 for (int n=0; n<=100;n++){
         double h= h1p5.getBinContent(n);
-        System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p5.getAxis().getBinCenter(n));
+        //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p5.getAxis().getBinCenter(n));
         if( halfmax2-(halfmax2*0.1) <= h && h <= halfmax2+(halfmax2*0.1) ){
                 if(found2==0){
                         xn1=n;
                         found2=1;
-                        System.out.println("xn1= "+xn1+" and: "+h1p5.getAxis().getBinCenter(xn1));
+                        //System.out.println("xn1= "+xn1+" and: "+h1p5.getAxis().getBinCenter(xn1));
                 }
                 else if(found2==1){
                         xn2=n;
                         found2=1;
-                        System.out.println("xn2= "+xn2+" and: "+h1p5.getAxis().getBinCenter(xn2));
+                       	//System.out.println("xn2= "+xn2+" and: "+h1p5.getAxis().getBinCenter(xn2));
                 }
                 else{
                         System.out.println("Check Script");
@@ -221,8 +221,8 @@ h1p6.setOptStat("1101");
 double hAmp6  = h1p6.getBinContent(h1p6.getMaximumBin());
 double hMean6 = h1p6.getAxis().getBinCenter(h1p6.getMaximumBin());
 //double hRMS6 = 10;
-double hRMS6 = 0.5;
-F1D f1p6 = new F1D("EC Electron Sampling Fraction", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 0.20,0.24);
+double hRMS6 = 0.2;
+F1D f1p6 = new F1D("EC Electron Sampling Fraction", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 0.20,0.25);
 f1p6.setOptStat("1111111");
 f1p6.setLineColor(2);
 f1p6.setParameter(0, hAmp6);
@@ -519,16 +519,16 @@ double yCVTp= 2*halfmax1;
 	DataLine line1 = new DataLine(x1CVTp,0.0,x1CVTp,yCVTp);
 	line1.setLineColor(2);
 	line1.setLineWidth(2);
-	line1.setArrowSizeOrigin(15);
-	line1.setArrowSizeEnd(15);
-	line1.setArrowAngle(25);
+	//line1.setArrowSizeOrigin(15);
+	//line1.setArrowSizeEnd(15);
+	//line1.setArrowAngle(25);
 	
 	DataLine line2 = new DataLine(x2CVTp,0.0,x2CVTp,yCVTp);
 	line2.setLineColor(2);
 	line2.setLineWidth(2);
-	line2.setArrowSizeOrigin(15);
-	line2.setArrowSizeEnd(15);
-	line2.setArrowAngle(25);
+	//line2.setArrowSizeOrigin(15);
+	//line2.setArrowSizeEnd(15);
+	//line2.setArrowAngle(25);
 //int
 double x1CVTn= h1p5.getAxis().getBinCenter(xn1);
 //int x1CVTn=xn1;
@@ -540,16 +540,16 @@ double yCVTn= 2*halfmax2;
 	DataLine line3 = new DataLine(x1CVTn,0.0,x1CVTn,yCVTn);
         line3.setLineColor(2);
         line3.setLineWidth(2);
-        line3.setArrowSizeOrigin(15);
-        line3.setArrowSizeEnd(15);
-        line3.setArrowAngle(25);
+        //line3.setArrowSizeOrigin(15);
+        //line3.setArrowSizeEnd(15);
+        //line3.setArrowAngle(25);
 
 	DataLine line4 = new DataLine(x2CVTn,0.0,x2CVTn,yCVTn);
         line4.setLineColor(2);
         line4.setLineWidth(2);
-        line4.setArrowSizeOrigin(15);
-        line4.setArrowSizeEnd(15);
-        line4.setArrowAngle(25);
+        //line4.setArrowSizeOrigin(15);
+        //line4.setArrowSizeEnd(15);
+        //line4.setArrowAngle(25);
 
 	TCanvas crosses = new TCanvas("TBT, CVT, and EC", 1000, 800);
 	crosses.divide(2,3);
@@ -686,7 +686,36 @@ double yCVTn= 2*halfmax2;
         crosses7.cd(3);
         crosses7.getCanvas().draw(dir.getObject("EB","hi_beta_neg_ctof"));
 
-	crosses7.save("EB_Beta.png");
-	//crosses7.SaveAs("EB_Beta.png");
+
+String foldername ="Images_for_Run_"+args[0];
+String foldercommand="mkdir "+foldername;
+String movecommand1="mv TBT_CVT_and_EC_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand2="mv FTOF_beta_vs_p_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand3="mv FTOF_residuals_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand4="mv HTCC_and_FT_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand5="mv CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand6="mv EB_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand7="mv EB_Beta_"+args[0]+".png Images_for_Run_"+args[0];
+
+println foldercommand.execute().text;
+println "ls".execute().text;
+
+
+	crosses.save("TBT_CVT_and_EC_"+args[0]+".png");
+	crosses2.save("FTOF_beta_vs_p_"+args[0]+".png");
+	crosses3.save("FTOF_residuals_"+args[0]+".png");
+        crosses4.save("HTCC_and_FT_"+args[0]+".png");
+        crosses5.save("CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png");
+        crosses6.save("EB_"+args[0]+".png");
+        crosses7.save("EB_Beta_"+args[0]+".png");
+
+println movecommand1.execute().text;
+println movecommand2.execute().text;
+println movecommand3.execute().text;
+println movecommand4.execute().text;
+println movecommand5.execute().text;
+println movecommand6.execute().text;
+println movecommand7.execute().text;
+println "ls".execute().text;
 
 System.out.println("These results are for: "+fileName);
