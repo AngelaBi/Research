@@ -1,0 +1,28 @@
+#!/bin/bash
+# run number
+echo $1
+#config
+echo $2
+
+directory="/work/clas12/rga/spring18/pass0/v0/Ebeam10p6_negative$2/cooked_5bp7p1/"
+program="/home/biselli/local/src/KPP-Plots/bin/kpp-batch"
+echo item: $i
+#files=$(ls -A $directory/out_clas_00$i.evio.[2-3][0-9].hipo)
+#files=$(ls -A $directory/out_clas_00$i.evio.[2][3-4].hipo)
+files=$(ls -A out_clas_00*)
+echo $files
+if [[ $? != 0 ]]; then
+    echo "Command failed."
+elif [[ $files ]]; then
+    echo "Files found."
+    #$program $files > out$i.log 2>error$i.log
+    $program $files
+    mv kpp_histos.hipo kpp_histos.$i.hipo
+else
+    echo "No files found."
+fi
+cp kpp_histos.$i.hipo /work/clas12/biselli/out_gemc/
+
+
+
+
