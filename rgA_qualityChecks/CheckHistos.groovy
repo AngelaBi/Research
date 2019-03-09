@@ -153,7 +153,7 @@ double PCenterCVT=((h1p4.getAxis().getBinCenter(xp2)+h1p4.getAxis().getBinCenter
 
 System.out.println("Center of Positive CVT: ");
 System.out.println(PCenterCVT+"\n");
-System.out.println("Extention of Positive CVT: ");
+System.out.println("Extension of Positive CVT: ");
 System.out.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
 
 H1F h1p5 = dir.getObject("CVT", "hi_vz_neg");
@@ -211,7 +211,7 @@ double NCenterCVT=((h1p5.getAxis().getBinCenter(xn2)+h1p5.getAxis().getBinCenter
 
 System.out.println("Center of Negative CVT: ");
 System.out.println(NCenterCVT+"\n");
-System.out.println("Extention of Negative CVT: ");
+System.out.println("Extension of Negative CVT: ");
 System.out.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
 
 	System.out.println("\n");
@@ -696,6 +696,7 @@ String movecommand4="mv HTCC_and_FT_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand5="mv CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand6="mv EB_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand7="mv EB_Beta_"+args[0]+".png Images_for_Run_"+args[0];
+String movetext="mv Data_Output_Run_"+args[0]+".txt Images_for_Run_"+args[0];
 
 println foldercommand.execute().text;
 println "ls".execute().text;
@@ -709,6 +710,63 @@ println "ls".execute().text;
         crosses6.save("EB_"+args[0]+".png");
         crosses7.save("EB_Beta_"+args[0]+".png");
 
+PrintWriter writer = new PrintWriter("Data_Output_Run_"+args[0]+".txt", "UTF-8");
+
+writer.println("\n TBT Data");
+
+writer.println("Peak of Negative TBT: ");
+writer.println(f1p.getParameter(1)+"\n");
+
+writer.println("Peak of Positive TBT: ");
+writer.println(f1p3.getParameter(1)+"\n");
+
+writer.println("\n CVT Data");
+
+writer.println("Center of Positive CVT: ");
+writer.println(PCenterCVT+"\n");
+writer.println("Extension of Positive CVT: ");
+writer.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
+
+writer.println("Center of Negative CVT: ");
+writer.println(NCenterCVT+"\n");
+writer.println("Extension of Negative CVT: ");
+writer.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
+
+writer.println("\n EC Data");
+
+writer.println("Peak of EC electron SF: ");
+writer.println(f1p6.getParameter(1)+"\n");
+
+writer.println("Peak of EC pi0: ");
+writer.println(f1p2.getParameter(1)+"\n");
+
+writer.println("\n HTCC Data");
+
+writer.println("Photoelectron Distribution Peak: ");
+writer.println(f1p8.getParameter(1)+"\n");
+
+writer.println("\n FT Data");
+
+writer.println("Hodoscope energy Peak 1: ");
+writer.println(f1p11.getParameter(1)+"\n");
+
+writer.println("Hodoscope energy Peak 2: ");
+writer.println(f1p12.getParameter(1)+"\n");
+
+writer.println("Hodoscope time Peak: ");
+writer.println(f1p13.getParameter(1)+"\n");
+
+writer.println("Calorimeter time Peak: ");
+writer.println(f1p14.getParameter(1)+"\n");
+
+writer.println("FT pi0 Peak: ");
+writer.println(f1p15.getParameter(1)+"\n");
+
+writer.println("\n");
+
+writer.close();
+
+
 println movecommand1.execute().text;
 println movecommand2.execute().text;
 println movecommand3.execute().text;
@@ -716,6 +774,8 @@ println movecommand4.execute().text;
 println movecommand5.execute().text;
 println movecommand6.execute().text;
 println movecommand7.execute().text;
+println movetext.execute().text; 
 println "ls".execute().text;
+
 
 System.out.println("These results are for: "+fileName);
