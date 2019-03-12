@@ -72,6 +72,7 @@ f1p.setParameter(3, 0.0);
 f1p.setParameter(4, 0.0);
 DataFitter.fit(f1p,h1p,"LQ");
 System.out.println("Peak of Negative TBT: ");
+	//double Peak_of_Negative_TBT=f1p.getParameter(1);
 System.out.println(f1p.getParameter(1)+"\n");
 
 H1F h1p3 = dir.getObject("TBT", "hi_vz_pos");
@@ -91,6 +92,7 @@ f1p3.setParameter(3, 0.0);
 f1p3.setParameter(4, 0.0);
 DataFitter.fit(f1p3,h1p3,"LQ");
 System.out.println("Peak of Positive TBT: ");
+	//double Peak_of_Positive_TBT=f1p3.getParameter(1);
 System.out.println(f1p3.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -154,6 +156,7 @@ double PCenterCVT=((h1p4.getAxis().getBinCenter(xp2)+h1p4.getAxis().getBinCenter
 System.out.println("Center of Positive CVT: ");
 System.out.println(PCenterCVT+"\n");
 System.out.println("Extension of Positive CVT: ");
+	//double Extension_of_Positive_CVT=(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1);
 System.out.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
 
 H1F h1p5 = dir.getObject("CVT", "hi_vz_neg");
@@ -212,6 +215,7 @@ double NCenterCVT=((h1p5.getAxis().getBinCenter(xn2)+h1p5.getAxis().getBinCenter
 System.out.println("Center of Negative CVT: ");
 System.out.println(NCenterCVT+"\n");
 System.out.println("Extension of Negative CVT: ");
+	//double Extension_of_Negative_CVT=h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1);
 System.out.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
 
 	System.out.println("\n");
@@ -234,6 +238,7 @@ f1p6.setParameter(3, 0.0);
 f1p6.setParameter(4, 0.0);
 DataFitter.fit(f1p6,h1p6,"LQ");
 System.out.println("Peak of EC electron SF: ");
+	//double Peak_of_EC_electron_SF=f1p6.getParameter(1);
 System.out.println(f1p6.getParameter(1)+"\n");
 
 H1F h1p2 = dir.getObject("EC", "hi_pi0_mass");
@@ -253,6 +258,7 @@ f1p2.setParameter(3, 0.0);
 f1p2.setParameter(4, 0.0);
 DataFitter.fit(f1p2,h1p2,"LQ");
 System.out.println("Peak of EC pi0: ");
+	//double Peak_of_EC_pi0=f1p2.getParameter(1);
 System.out.println(f1p2.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -274,6 +280,7 @@ f1p8.setParameter(3, 0.0);
 f1p8.setParameter(4, 0.0);
 DataFitter.fit(f1p8,h1p8,"LQ");
 System.out.println("Photoelectron Distribution Peak: ");
+	//double Photoelectron_Distribution_Peak=f1p8.getParameter(1);
 System.out.println(f1p8.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -336,7 +343,8 @@ f1p11.setParameter(2, 2.0);
 f1p11.setParameter(3, 0.0);
 f1p11.setParameter(4, 0.0);
 DataFitter.fit(f1p11,h1p11,"LQ");
-System.out.println("Hodoscope energy Peak 1: ");
+System.out.println("Hodoscope energy Peak 1: ")
+	//double Hodoscope_energy_Peak_1=f1p11.getParameter(1);
 System.out.println(f1p11.getParameter(1)+"\n");
 
 H1F h1p12 = dir.getObject("FT", "hi_hodo_ematch_l2");
@@ -356,6 +364,7 @@ f1p12.setParameter(3, 0.0);
 f1p12.setParameter(4, 0.0);
 DataFitter.fit(f1p12,h1p12,"LQ");
 System.out.println("Hodoscope energy Peak 2: ");
+	//double Hodoscope_energy_Peak_2=f1p12.getParameter(1);
 System.out.println(f1p12.getParameter(1)+"\n");
 
 H1F h1p13 = dir.getObject("FT", "hi_hodo_tmatch_l2");
@@ -375,6 +384,7 @@ f1p13.setParameter(3, 0.0);
 f1p13.setParameter(4, 0.0);
 DataFitter.fit(f1p13,h1p13,"LQ");
 System.out.println("Hodoscope time Peak: ");
+	//double Hodoscope_time_Peak=f1p13.getParameter(1);
 System.out.println(f1p13.getParameter(1)+"\n");
 
 H1F h1p14 = dir.getObject("FT", "hi_cal_time_cut_ch");
@@ -394,6 +404,7 @@ f1p14.setParameter(3, 0.0);
 f1p14.setParameter(4, 0.0);
 DataFitter.fit(f1p14,h1p14,"LQ");
 System.out.println("Calorimeter time Peak: ");
+	//double Calorimeter_time_Peak=f1p14.getParameter(1);
 System.out.println(f1p14.getParameter(1)+"\n");
 
 H1F h1p15 = dir.getObject("FT", "hpi0sum");
@@ -413,6 +424,7 @@ f1p15.setParameter(3, 0.0);
 f1p15.setParameter(4, 0.0);
 DataFitter.fit(f1p15,h1p15,"LQ");
 System.out.println("FT pi0 Peak: ");
+	//double FT_pi0_Peak=f1p15.getParameter(1);
 System.out.println(f1p15.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -699,15 +711,15 @@ String movecommand7="mv EB_Beta_"+args[0]+".png Images_for_Run_"+args[0];
 String movetext="mv Data_Output_Run_"+args[0]+".txt Images_for_Run_"+args[0];
 
 println foldercommand.execute().text;
-println "ls".execute().text;
+//println "ls".execute().text;
 
 
 	crosses.save("TBT_CVT_and_EC_"+args[0]+".png");
 	crosses2.save("FTOF_beta_vs_p_"+args[0]+".png");
 	crosses3.save("FTOF_residuals_"+args[0]+".png");
         crosses4.save("HTCC_and_FT_"+args[0]+".png");
-        crosses5.save("CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png");
-        crosses6.save("EB_"+args[0]+".png");
+        crosses6.save("CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png");
+        crosses5.save("EB_"+args[0]+".png");
         crosses7.save("EB_Beta_"+args[0]+".png");
 
 PrintWriter writer = new PrintWriter("Data_Output_Run_"+args[0]+".txt", "UTF-8");
@@ -775,7 +787,7 @@ println movecommand5.execute().text;
 println movecommand6.execute().text;
 println movecommand7.execute().text;
 println movetext.execute().text; 
-println "ls".execute().text;
+//println "ls".execute().text;
 
 
 System.out.println("These results are for: "+fileName);
