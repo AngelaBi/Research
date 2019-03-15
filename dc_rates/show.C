@@ -15,7 +15,7 @@ void show_dc_occ()
 
 
 	// TEMP SCALE TO 100 SO WE DO NOT HAVE TO RECALC
-	dc_occ[SECT][ENERGY][CONF]->SetMaximum(10);
+	dc_occ[SECT][ENERGY][CONF]->SetMaximum(3);
 
 	dc_occ[SECT][ENERGY][CONF]->Draw("colz");
 	
@@ -38,7 +38,7 @@ void show_dc_occ()
 			rates1->Print(Form("img/conf-%s_zone-%s_plot-occ_region-3.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
 		}
 	}
-rates1->Print(Form("HitProbSector%d.pdf", SECT+1));
+rates1->Print(Form("HitProbSector%d_%s.jpg", SECT+1,fn.c_str()));
 }
 
 
@@ -75,7 +75,7 @@ void show_dc_int_occ()
 
 		// manually setting max
 		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(max);
-		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(10);
+		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(3);
 
 //		if(CONF==2)
 //			dc_occ_summary[r][ENERGY][CONF]->SetMaximum(2);
@@ -151,7 +151,7 @@ void show_dc_int_occ()
 			rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-3.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
 		}
 	}
-rates->Print("summaryOcc.pdf");
+rates->Print(Form("summaryOcc_%s.jpg",fn.c_str()));
 }
 
 
@@ -242,7 +242,7 @@ void show_zvertex()
 
 	for(int z=0; z<NZONES; z++){
 
-rates1->Print(Form("zone-%s_plot-zvertex_region-%d.pdf",  SZONE[z].c_str(),  REG+1 ) );
+rates1->Print(Form("zone-%s_plot-zvertex_region-%d.jpg",  SZONE[z].c_str(),  REG+1 ) );
 	}
 
 }
@@ -323,9 +323,9 @@ void show_vertex()
 
 	
 	if(PRINT != "")
-		rates1->Print(Form("img/conf-%s_zone-%s_plot-vertex_region-%d.%s", sconf[CONF].c_str(),  SZONE[ZONE].c_str(), REG+1, PRINT.c_str() ) );
+    rates1->Print(Form("img/conf-%s_zone-%s_plot-vertex_region-%d.%s", sconf[CONF].c_str(),  SZONE[ZONE].c_str(), REG+1, PRINT.c_str() ) );
 
- rates1->Print(Form("zone-%s_plot-vertex_region-%d.pdf",  SZONE[ZONE].c_str(), REG+1 ) );
+  rates1->Print(Form("zone-%s_plot-vertex_r1_%s.jpg",  SZONE[3].c_str(),fn.c_str() ) );
 }
 
 
