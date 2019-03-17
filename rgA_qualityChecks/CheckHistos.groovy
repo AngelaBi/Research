@@ -72,7 +72,7 @@ f1p.setParameter(3, 0.0);
 f1p.setParameter(4, 0.0);
 DataFitter.fit(f1p,h1p,"LQ");
 System.out.println("Peak of Negative TBT: ");
-	//double Peak_of_Negative_TBT=f1p.getParameter(1);
+	String Peak_of_Negative_TBT=f1p.getParameter(1)+"\t";
 System.out.println(f1p.getParameter(1)+"\n");
 
 H1F h1p3 = dir.getObject("TBT", "hi_vz_pos");
@@ -92,7 +92,7 @@ f1p3.setParameter(3, 0.0);
 f1p3.setParameter(4, 0.0);
 DataFitter.fit(f1p3,h1p3,"LQ");
 System.out.println("Peak of Positive TBT: ");
-	//double Peak_of_Positive_TBT=f1p3.getParameter(1);
+	String Peak_of_Positive_TBT=f1p3.getParameter(1)+"\t";
 System.out.println(f1p3.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -126,7 +126,7 @@ int found1=0;
 for (int n=0; n<=100;n++){
 	double h= h1p4.getBinContent(n);
 	//System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
-	if( halfmax1-(halfmax1*0.1) <= h && h <= halfmax1+(halfmax1*0.1) ){
+	if( halfmax1-(halfmax1*0.15) <= h && h <= halfmax1+(halfmax1*0.15) ){
 		if(found1==0){
 			xp1=n;
 			found1=1;
@@ -156,8 +156,9 @@ double PCenterCVT=((h1p4.getAxis().getBinCenter(xp2)+h1p4.getAxis().getBinCenter
 System.out.println("Center of Positive CVT: ");
 System.out.println(PCenterCVT+"\n");
 System.out.println("Extension of Positive CVT: ");
-	//double Extension_of_Positive_CVT=(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1);
-System.out.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
+	String Extension_of_Positive_CVT=(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\t");
+//System.out.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
+System.out.println(Extension_of_Positive_CVT+"\n");
 
 H1F h1p5 = dir.getObject("CVT", "hi_vz_neg");
 h1p5.setOptStat("1101");
@@ -186,7 +187,7 @@ int found2=0;
 for (int n=0; n<=100;n++){
         double h= h1p5.getBinContent(n);
         //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p5.getAxis().getBinCenter(n));
-        if( halfmax2-(halfmax2*0.1) <= h && h <= halfmax2+(halfmax2*0.1) ){
+        if( halfmax2-(halfmax2*0.15) <= h && h <= halfmax2+(halfmax2*0.15) ){
                 if(found2==0){
                         xn1=n;
                         found2=1;
@@ -215,7 +216,7 @@ double NCenterCVT=((h1p5.getAxis().getBinCenter(xn2)+h1p5.getAxis().getBinCenter
 System.out.println("Center of Negative CVT: ");
 System.out.println(NCenterCVT+"\n");
 System.out.println("Extension of Negative CVT: ");
-	//double Extension_of_Negative_CVT=h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1);
+	String Extension_of_Negative_CVT=h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\t";
 System.out.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
 
 	System.out.println("\n");
@@ -224,9 +225,9 @@ H1F h1p6 = dir.getObject("EC", "hi_sf_EC");
 h1p6.setOptStat("1101");
 double hAmp6  = h1p6.getBinContent(h1p6.getMaximumBin());
 double hMean6 = h1p6.getAxis().getBinCenter(h1p6.getMaximumBin());
-//double hRMS6 = 10;
 double hRMS6 = 0.2;
-F1D f1p6 = new F1D("EC Electron Sampling Fraction", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 0.20,0.25);
+//double hRMS6 = 0.1;
+F1D f1p6 = new F1D("EC Electron Sampling Fraction", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 0.00,0.60);
 f1p6.setOptStat("1111111");
 f1p6.setLineColor(2);
 f1p6.setParameter(0, hAmp6);
@@ -238,7 +239,7 @@ f1p6.setParameter(3, 0.0);
 f1p6.setParameter(4, 0.0);
 DataFitter.fit(f1p6,h1p6,"LQ");
 System.out.println("Peak of EC electron SF: ");
-	//double Peak_of_EC_electron_SF=f1p6.getParameter(1);
+	String Peak_of_EC_electron_SF=f1p6.getParameter(1)+"\t";
 System.out.println(f1p6.getParameter(1)+"\n");
 
 H1F h1p2 = dir.getObject("EC", "hi_pi0_mass");
@@ -258,7 +259,7 @@ f1p2.setParameter(3, 0.0);
 f1p2.setParameter(4, 0.0);
 DataFitter.fit(f1p2,h1p2,"LQ");
 System.out.println("Peak of EC pi0: ");
-	//double Peak_of_EC_pi0=f1p2.getParameter(1);
+	String Peak_of_EC_pi0=f1p2.getParameter(1)+"\t";
 System.out.println(f1p2.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -280,7 +281,7 @@ f1p8.setParameter(3, 0.0);
 f1p8.setParameter(4, 0.0);
 DataFitter.fit(f1p8,h1p8,"LQ");
 System.out.println("Photoelectron Distribution Peak: ");
-	//double Photoelectron_Distribution_Peak=f1p8.getParameter(1);
+	String Photoelectron_Distribution_Peak=f1p8.getParameter(1)+"\t";
 System.out.println(f1p8.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -338,13 +339,14 @@ f1p11.setLineColor(2);
 f1p11.setParameter(0, hAmp11);
 f1p11.setParLimits(0, hAmp11*0.8, hAmp11*1.2);
 f1p11.setParameter(1, hMean11);
-f1p11.setParLimits(1, hMean11-hRMS, hMean11+hRMS);
+//f1p11.setParLimits(1, hMean11-hRMS, hMean11+hRMS);
+f1p11.setParLimits(1, 0, hMean11+hRMS);
 f1p11.setParameter(2, 2.0);
 f1p11.setParameter(3, 0.0);
 f1p11.setParameter(4, 0.0);
 DataFitter.fit(f1p11,h1p11,"LQ");
 System.out.println("Hodoscope energy Peak 1: ")
-	//double Hodoscope_energy_Peak_1=f1p11.getParameter(1);
+	String Hodoscope_energy_Peak_1=f1p11.getParameter(1)+"\t";
 System.out.println(f1p11.getParameter(1)+"\n");
 
 H1F h1p12 = dir.getObject("FT", "hi_hodo_ematch_l2");
@@ -352,7 +354,7 @@ h1p12.setOptStat("1101");
 double hAmp12  = h1p12.getBinContent(h1p12.getMaximumBin());
 double hMean12 = h1p12.getAxis().getBinCenter(h1p12.getMaximumBin());
 //double hRMS  = 10;
-F1D f1p12 = new F1D("FT Hodoscope Energy Peak 2", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 1.6,4.0);
+F1D f1p12 = new F1D("FT Hodoscope Energy Peak 2", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", 2.0,4.0);
 f1p12.setOptStat("1111111");
 f1p12.setLineColor(2);
 f1p12.setParameter(0, hAmp12);
@@ -364,7 +366,7 @@ f1p12.setParameter(3, 0.0);
 f1p12.setParameter(4, 0.0);
 DataFitter.fit(f1p12,h1p12,"LQ");
 System.out.println("Hodoscope energy Peak 2: ");
-	//double Hodoscope_energy_Peak_2=f1p12.getParameter(1);
+	String Hodoscope_energy_Peak_2=f1p12.getParameter(1)+"\t";
 System.out.println(f1p12.getParameter(1)+"\n");
 
 H1F h1p13 = dir.getObject("FT", "hi_hodo_tmatch_l2");
@@ -384,7 +386,7 @@ f1p13.setParameter(3, 0.0);
 f1p13.setParameter(4, 0.0);
 DataFitter.fit(f1p13,h1p13,"LQ");
 System.out.println("Hodoscope time Peak: ");
-	//double Hodoscope_time_Peak=f1p13.getParameter(1);
+	String Hodoscope_time_Peak=f1p13.getParameter(1)+"\t";
 System.out.println(f1p13.getParameter(1)+"\n");
 
 H1F h1p14 = dir.getObject("FT", "hi_cal_time_cut_ch");
@@ -392,7 +394,7 @@ h1p14.setOptStat("1101");
 double hAmp14  = h1p14.getBinContent(h1p14.getMaximumBin());
 double hMean14 = h1p14.getAxis().getBinCenter(h1p14.getMaximumBin());
 //double hRMS  = 10;
-F1D f1p14 = new F1D("FT Calorimeter Time Peak", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -0.4,0.4);
+F1D f1p14 = new F1D("FT Calorimeter Time Peak", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -5.0,5.0);
 f1p14.setOptStat("1111111");
 f1p14.setLineColor(2);
 f1p14.setParameter(0, hAmp14);
@@ -404,7 +406,7 @@ f1p14.setParameter(3, 0.0);
 f1p14.setParameter(4, 0.0);
 DataFitter.fit(f1p14,h1p14,"LQ");
 System.out.println("Calorimeter time Peak: ");
-	//double Calorimeter_time_Peak=f1p14.getParameter(1);
+	String Calorimeter_time_Peak=f1p14.getParameter(1)+"\t";
 System.out.println(f1p14.getParameter(1)+"\n");
 
 H1F h1p15 = dir.getObject("FT", "hpi0sum");
@@ -424,7 +426,7 @@ f1p15.setParameter(3, 0.0);
 f1p15.setParameter(4, 0.0);
 DataFitter.fit(f1p15,h1p15,"LQ");
 System.out.println("FT pi0 Peak: ");
-	//double FT_pi0_Peak=f1p15.getParameter(1);
+	String FT_pi0_Peak=f1p15.getParameter(1)+"\t";
 System.out.println(f1p15.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -445,7 +447,7 @@ f1p16.setParameter(2, 2.0);
 f1p16.setParameter(3, 0.0);
 f1p16.setParameter(4, 0.0);
 DataFitter.fit(f1p16,h1p16,"LQ");
-//System.out.println("FT pi0 Peak: ");
+	String EB_Electron_Center=f1p16.getParameter(1)+"\t";
 //System.out.println(f1p16.getParameter(1));
 
 H1F h1p17 = dir.getObject("EB", "hi_vt_pi");
@@ -453,7 +455,7 @@ h1p17.setOptStat("1101");
 double hAmp17 = h1p17.getBinContent(h1p17.getMaximumBin());
 double hMean17 = h1p17.getAxis().getBinCenter(h1p17.getMaximumBin());
 //double hRMS  = 10;
-F1D f1p17 = new F1D("EB Start Time Pion Center", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -1.0,0.5);
+F1D f1p17 = new F1D("EB Start Time Pion Center", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -0.4,0.4);
 f1p17.setOptStat("1111111");
 f1p17.setLineColor(2);
 f1p17.setParameter(0, hAmp17);
@@ -464,7 +466,7 @@ f1p17.setParameter(2, 2.0);
 f1p17.setParameter(3, 0.0);
 f1p17.setParameter(4, 0.0);
 DataFitter.fit(f1p17,h1p17,"LQ");
-//System.out.println("FT pi0 Peak: ");
+	String EB_Pion_Center=f1p17.getParameter(1)+"\t";
 //System.out.println(f1p17.getParameter(1));
 
 H1F h1p18 = dir.getObject("EB", "hi_vt_pr");
@@ -472,9 +474,10 @@ h1p18.setOptStat("1101");
 double hAmp18 = h1p18.getBinContent(h1p18.getMaximumBin());
 double hMean18 = h1p18.getAxis().getBinCenter(h1p18.getMaximumBin());
 //double hRMS  = 10;
-F1D f1p18 = new F1D("EB Start Time Proton Center", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -0.8,0.7);
+F1D f1p18 = new F1D("EB Start Time Proton Center", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -0.4,0.4);
 f1p18.setOptStat("1111111");
-f1p18.setLineColor(2);
+//f1p18.setLineColor(2);
+f1p18.setLineColor(3);
 f1p18.setParameter(0, hAmp18);
 f1p18.setParLimits(0, hAmp18*0.8, hAmp18*1.2);
 f1p18.setParameter(1, hMean18);
@@ -483,7 +486,7 @@ f1p18.setParameter(2, 2.0);
 f1p18.setParameter(3, 0.0);
 f1p18.setParameter(4, 0.0);
 DataFitter.fit(f1p18,h1p18,"LQ");
-//System.out.println("FT pi0 Peak: ");
+	String EB_Proton_Center=f1p18.getParameter(1)+"\t";
 //System.out.println(f1p18.getParameter(1));
 
 H2F h2p = dir.getObject("FTOF","hi_beta_pos_1");
@@ -722,59 +725,74 @@ println foldercommand.execute().text;
         crosses5.save("EB_"+args[0]+".png");
         crosses7.save("EB_Beta_"+args[0]+".png");
 
+
+String writeTBT = Peak_of_Positive_TBT+Peak_of_Negative_TBT+"See histograms\t"+"Notes\t\t";
+String writeCVT = "See CVT histos\t"+Extension_of_Positive_CVT+"\t"+PCenterCVT+"\t\t"+"See CVT histos\t"+Extension_of_Negative_CVT+NCenterCVT+"\t\t"+"Notes\t\t";
+String writeEC = Peak_of_EC_electron_SF+"\t"+Peak_of_EC_pi0+"\t"+"Notes\t\t";
+String writeFTOF = "\t\t\t\t\t\t\t\t"+"See RF offsets P1A\t"+"See RF offsets P1B\t"+"\t"+"Notes\t\t";
+String writeHTCC = Photoelectron_Distribution_Peak+"\t"+"Notes\t\t";
+String writeCTOF = "\t\t\t"+"See CTOF histos\t\t"+"See CTOF histos\t\t"+"Notes\t\t";
+String writeCND = "\t\t\t"+"See CND histos\t\t"+"See CND histos\t\t"+"Notes\t\t";
+String writeFT = Hodoscope_energy_Peak_1+Hodoscope_energy_Peak_2+"\t"+Hodoscope_time_Peak+"\t"+"See FT histos\t\t"+Calorimeter_time_Peak+"\t"+FT_pi0_Peak+"\t"+"Notes\t\t";
+String writeEB = EB_Electron_Center+EB_Pion_Center+EB_Proton_Center+"\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t\t"+"Notes\t";
+
 PrintWriter writer = new PrintWriter("Data_Output_Run_"+args[0]+".txt", "UTF-8");
 
-writer.println("\n TBT Data");
+writer.println(args[0]+"\t\t\t\t"+writeTBT+writeCVT+writeEC+writeFTOF+writeHTCC+writeCTOF+writeCND+writeFT+writeEB);
 
-writer.println("Peak of Negative TBT: ");
-writer.println(f1p.getParameter(1)+"\n");
 
-writer.println("Peak of Positive TBT: ");
-writer.println(f1p3.getParameter(1)+"\n");
+//writer.println("\n TBT Data");
 
-writer.println("\n CVT Data");
+//writer.println("Peak of Negative TBT: ");
+//writer.println(f1p.getParameter(1)+"\n");
 
-writer.println("Center of Positive CVT: ");
-writer.println(PCenterCVT+"\n");
-writer.println("Extension of Positive CVT: ");
-writer.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
+//writer.println("Peak of Positive TBT: ");
+//writer.println(f1p3.getParameter(1)+"\n");
 
-writer.println("Center of Negative CVT: ");
-writer.println(NCenterCVT+"\n");
-writer.println("Extension of Negative CVT: ");
-writer.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
+//writer.println("\n CVT Data");
 
-writer.println("\n EC Data");
+//writer.println("Center of Positive CVT: ");
+//writer.println(PCenterCVT+"\n");
+//writer.println("Extension of Positive CVT: ");
+//writer.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
 
-writer.println("Peak of EC electron SF: ");
-writer.println(f1p6.getParameter(1)+"\n");
+//writer.println("Center of Negative CVT: ");
+//writer.println(NCenterCVT+"\n");
+//writer.println("Extension of Negative CVT: ");
+//writer.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
 
-writer.println("Peak of EC pi0: ");
-writer.println(f1p2.getParameter(1)+"\n");
+//writer.println("\n EC Data");
 
-writer.println("\n HTCC Data");
+//writer.println("Peak of EC electron SF: ");
+//writer.println(f1p6.getParameter(1)+"\n");
 
-writer.println("Photoelectron Distribution Peak: ");
-writer.println(f1p8.getParameter(1)+"\n");
+//writer.println("Peak of EC pi0: ");
+//writer.println(f1p2.getParameter(1)+"\n");
 
-writer.println("\n FT Data");
+//writer.println("\n HTCC Data");
 
-writer.println("Hodoscope energy Peak 1: ");
-writer.println(f1p11.getParameter(1)+"\n");
+//writer.println("Photoelectron Distribution Peak: ");
+//writer.println(f1p8.getParameter(1)+"\n");
 
-writer.println("Hodoscope energy Peak 2: ");
-writer.println(f1p12.getParameter(1)+"\n");
+//writer.println("\n FT Data");
 
-writer.println("Hodoscope time Peak: ");
-writer.println(f1p13.getParameter(1)+"\n");
+//writer.println("Hodoscope energy Peak 1: ");
+//writer.println(f1p11.getParameter(1)+"\n");
 
-writer.println("Calorimeter time Peak: ");
-writer.println(f1p14.getParameter(1)+"\n");
+//writer.println("Hodoscope energy Peak 2: ");
+//writer.println(f1p12.getParameter(1)+"\n");
 
-writer.println("FT pi0 Peak: ");
-writer.println(f1p15.getParameter(1)+"\n");
+//writer.println("Hodoscope time Peak: ");
+//writer.println(f1p13.getParameter(1)+"\n");
 
-writer.println("\n");
+//writer.println("Calorimeter time Peak: ");
+//writer.println(f1p14.getParameter(1)+"\n");
+
+//writer.println("FT pi0 Peak: ");
+//writer.println(f1p15.getParameter(1)+"\n");
+
+//writer.println("\n");
+
 
 writer.close();
 
@@ -786,7 +804,7 @@ println movecommand4.execute().text;
 println movecommand5.execute().text;
 println movecommand6.execute().text;
 println movecommand7.execute().text;
-println movetext.execute().text; 
+//println movetext.execute().text; 
 //println "ls".execute().text;
 
 
