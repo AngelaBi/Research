@@ -73,6 +73,7 @@ f1p.setParameter(4, 0.0);
 DataFitter.fit(f1p,h1p,"LQ");
 System.out.println("Peak of Negative TBT: ");
 	String Peak_of_Negative_TBT=f1p.getParameter(1)+"\t";
+	double Peak_of_Negative_TBT_Num=f1p.getParameter(1);
 System.out.println(f1p.getParameter(1)+"\n");
 
 H1F h1p3 = dir.getObject("TBT", "hi_vz_pos");
@@ -93,6 +94,7 @@ f1p3.setParameter(4, 0.0);
 DataFitter.fit(f1p3,h1p3,"LQ");
 System.out.println("Peak of Positive TBT: ");
 	String Peak_of_Positive_TBT=f1p3.getParameter(1)+"\t";
+	double Peak_of_Positive_TBT_Num=f1p3.getParameter(1);
 System.out.println(f1p3.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -157,6 +159,7 @@ System.out.println("Center of Positive CVT: ");
 System.out.println(PCenterCVT+"\n");
 System.out.println("Extension of Positive CVT: ");
 	String Extension_of_Positive_CVT=(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\t");
+	double Extension_of_Positive_CVT_Num=(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1));
 //System.out.println(h1p4.getAxis().getBinCenter(xp2)-h1p4.getAxis().getBinCenter(xp1)+"\n");
 System.out.println(Extension_of_Positive_CVT+"\n");
 
@@ -217,6 +220,7 @@ System.out.println("Center of Negative CVT: ");
 System.out.println(NCenterCVT+"\n");
 System.out.println("Extension of Negative CVT: ");
 	String Extension_of_Negative_CVT=h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\t";
+	double Extension_of_Negative_CVT_Num=h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1);
 System.out.println(h1p5.getAxis().getBinCenter(xn2)-h1p5.getAxis().getBinCenter(xn1)+"\n");
 
 	System.out.println("\n");
@@ -240,6 +244,7 @@ f1p6.setParameter(4, 0.0);
 DataFitter.fit(f1p6,h1p6,"LQ");
 System.out.println("Peak of EC electron SF: ");
 	String Peak_of_EC_electron_SF=f1p6.getParameter(1)+"\t";
+	double Peak_of_EC_electron_SF_Num=f1p6.getParameter(1);
 System.out.println(f1p6.getParameter(1)+"\n");
 
 H1F h1p2 = dir.getObject("EC", "hi_pi0_mass");
@@ -260,6 +265,7 @@ f1p2.setParameter(4, 0.0);
 DataFitter.fit(f1p2,h1p2,"LQ");
 System.out.println("Peak of EC pi0: ");
 	String Peak_of_EC_pi0=f1p2.getParameter(1)+"\t";
+	double Peak_of_EC_pi0_Num=f1p2.getParameter(1);
 System.out.println(f1p2.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -282,6 +288,7 @@ f1p8.setParameter(4, 0.0);
 DataFitter.fit(f1p8,h1p8,"LQ");
 System.out.println("Photoelectron Distribution Peak: ");
 	String Photoelectron_Distribution_Peak=f1p8.getParameter(1)+"\t";
+	double Photoelectron_Distribution_Peak_Num=f1p8.getParameter(1);
 System.out.println(f1p8.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -347,6 +354,7 @@ f1p11.setParameter(4, 0.0);
 DataFitter.fit(f1p11,h1p11,"LQ");
 System.out.println("Hodoscope energy Peak 1: ")
 	String Hodoscope_energy_Peak_1=f1p11.getParameter(1)+"\t";
+	double Hodoscope_energy_Peak_1_Num=f1p11.getParameter(1);
 System.out.println(f1p11.getParameter(1)+"\n");
 
 H1F h1p12 = dir.getObject("FT", "hi_hodo_ematch_l2");
@@ -367,6 +375,7 @@ f1p12.setParameter(4, 0.0);
 DataFitter.fit(f1p12,h1p12,"LQ");
 System.out.println("Hodoscope energy Peak 2: ");
 	String Hodoscope_energy_Peak_2=f1p12.getParameter(1)+"\t";
+	double Hodoscope_energy_Peak_2_Num=f1p12.getParameter(1);
 System.out.println(f1p12.getParameter(1)+"\n");
 
 H1F h1p13 = dir.getObject("FT", "hi_hodo_tmatch_l2");
@@ -387,6 +396,7 @@ f1p13.setParameter(4, 0.0);
 DataFitter.fit(f1p13,h1p13,"LQ");
 System.out.println("Hodoscope time Peak: ");
 	String Hodoscope_time_Peak=f1p13.getParameter(1)+"\t";
+	double Hodoscope_time_Peak_Num=f1p13.getParameter(1);
 System.out.println(f1p13.getParameter(1)+"\n");
 
 H1F h1p14 = dir.getObject("FT", "hi_cal_time_cut_ch");
@@ -407,6 +417,7 @@ f1p14.setParameter(4, 0.0);
 DataFitter.fit(f1p14,h1p14,"LQ");
 System.out.println("Calorimeter time Peak: ");
 	String Calorimeter_time_Peak=f1p14.getParameter(1)+"\t";
+	double Calorimeter_time_Peak_Num=f1p14.getParameter(1);
 System.out.println(f1p14.getParameter(1)+"\n");
 
 H1F h1p15 = dir.getObject("FT", "hpi0sum");
@@ -427,6 +438,7 @@ f1p15.setParameter(4, 0.0);
 DataFitter.fit(f1p15,h1p15,"LQ");
 System.out.println("FT pi0 Peak: ");
 	String FT_pi0_Peak=f1p15.getParameter(1)+"\t";
+	double FT_pi0_Peak_Num=f1p15.getParameter(1);
 System.out.println(f1p15.getParameter(1)+"\n");
 
 	System.out.println("\n");
@@ -448,6 +460,7 @@ f1p16.setParameter(3, 0.0);
 f1p16.setParameter(4, 0.0);
 DataFitter.fit(f1p16,h1p16,"LQ");
 	String EB_Electron_Center=f1p16.getParameter(1)+"\t";
+	double EB_Electron_Center_Num=f1p16.getParameter(1);
 //System.out.println(f1p16.getParameter(1));
 
 H1F h1p17 = dir.getObject("EB", "hi_vt_pi");
@@ -467,6 +480,7 @@ f1p17.setParameter(3, 0.0);
 f1p17.setParameter(4, 0.0);
 DataFitter.fit(f1p17,h1p17,"LQ");
 	String EB_Pion_Center=f1p17.getParameter(1)+"\t";
+	double EB_Pion_Center_Num=f1p17.getParameter(1);
 //System.out.println(f1p17.getParameter(1));
 
 H1F h1p18 = dir.getObject("EB", "hi_vt_pr");
@@ -487,6 +501,7 @@ f1p18.setParameter(3, 0.0);
 f1p18.setParameter(4, 0.0);
 DataFitter.fit(f1p18,h1p18,"LQ");
 	String EB_Proton_Center=f1p18.getParameter(1)+"\t";
+	double EB_Proton_Center_Num=f1p18.getParameter(1);
 //System.out.println(f1p18.getParameter(1));
 
 H2F h2p = dir.getObject("FTOF","hi_beta_pos_1");
@@ -726,15 +741,63 @@ println foldercommand.execute().text;
         crosses7.save("EB_Beta_"+args[0]+".png");
 
 
-String writeTBT = Peak_of_Positive_TBT+Peak_of_Negative_TBT+"See histograms\t"+"Notes\t\t";
-String writeCVT = "See CVT histos\t"+Extension_of_Positive_CVT+"\t"+PCenterCVT+"\t\t"+"See CVT histos\t"+Extension_of_Negative_CVT+NCenterCVT+"\t\t"+"Notes\t\t";
-String writeEC = Peak_of_EC_electron_SF+"\t"+Peak_of_EC_pi0+"\t"+"Notes\t\t";
-String writeFTOF = "\t\t\t\t\t\t\t\t"+"See RF offsets P1A\t"+"See RF offsets P1B\t"+"\t"+"Notes\t\t";
-String writeHTCC = Photoelectron_Distribution_Peak+"\t"+"Notes\t\t";
-String writeCTOF = "\t\t\t"+"See CTOF histos\t\t"+"See CTOF histos\t\t"+"Notes\t\t";
-String writeCND = "\t\t\t"+"See CND histos\t\t"+"See CND histos\t\t"+"Notes\t\t";
-String writeFT = Hodoscope_energy_Peak_1+Hodoscope_energy_Peak_2+"\t"+Hodoscope_time_Peak+"\t"+"See FT histos\t\t"+Calorimeter_time_Peak+"\t"+FT_pi0_Peak+"\t"+"Notes\t\t";
-String writeEB = EB_Electron_Center+EB_Pion_Center+EB_Proton_Center+"\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t\t"+"Notes\t";
+String NotesTBT;
+	if( Peak_of_Positive_TBT_Num <= -5 || 5 <= Peak_of_Positive_TBT_Num || Peak_of_Negative_TBT_Num <= -5 || 5 <= Peak_of_Negative_TBT_Num  ){
+		NotesTBT="Unexpected Data - Check fit/data"+"\t\t";
+	} 
+		else {
+			NotesTBT="\t\t";
+        }
+
+String NotesCVT;
+        if( PCenterCVT <= -2 || 2 <= PCenterCVT || NCenterCVT <= -2 || 2 <= NCenterCVT || Extension_of_Positive_CVT_Num <= 2 || 8 <= Extension_of_Positive_CVT_Num || Extension_of_Negative_CVT_Num <=2 || 8 <= Extension_of_Negative_CVT_Num ){
+                NotesCVT="Unexpected Data - Check fit/data"+"\t\t";
+        }
+                else {  
+                        NotesCVT="\t\t";
+        }
+ 
+String NotesEC;
+        if( Peak_of_EC_electron_SF_Num <= 0.2 || 0.3 <= Peak_of_EC_electron_SF_Num || Peak_of_EC_pi0_Num <= 110 || 160 <= Peak_of_EC_pi0_Num ){
+                NotesEC="Unexpected Data - Check fit/data"+"\t\t";
+        }
+                else {
+                        NotesEC="\t\t";
+        }
+
+String NotesHTCC;
+        if( Photoelectron_Distribution_Peak_Num <= 5 || 15 <= Photoelectron_Distribution_Peak_Num ){
+                NotesHTCC="Unexpected Data - Check fit/data"+"\t\t";
+        }
+                else {
+                        NotesHTCC="\t\t";
+        }
+
+String NotesFT;
+        if( Hodoscope_energy_Peak_1_Num <= 0.5 || 2.5 <= Hodoscope_energy_Peak_1_Num || Hodoscope_energy_Peak_2_Num <= 2 || 4 <= Hodoscope_energy_Peak_2_Num || Hodoscope_time_Peak_Num <= -4 || 4 <= Hodoscope_time_Peak_Num || Calorimeter_time_Peak_Num <= -1 || 1 <= Calorimeter_time_Peak_Num || FT_pi0_Peak_Num <= 115 || 145 <= FT_pi0_Peak_Num){
+                NotesFT="Unexpected Data - Check fit/data"+"\t\t";
+        }
+                else {
+                        NotesFT="\t\t";
+        }
+
+String NotesEB;
+        if( EB_Electron_Center_Num <= -0.5 || 0.5 <= EB_Electron_Center_Num || EB_Pion_Center_Num <= -0.5 || 0.5 <= EB_Pion_Center_Num || EB_Proton_Center_Num <= -0.5 || 0.5 <= EB_Proton_Center_Num){
+                NotesEB="Unexpected Data - Check fit/data"+"\t\t";
+        }
+                else {
+                        NotesEB="\t";
+        }
+
+String writeTBT = Peak_of_Positive_TBT+Peak_of_Negative_TBT+"\t"+"See TBT histos\t\t"+NotesTBT;
+String writeCVT = "See CVT histos\t"+Extension_of_Positive_CVT+PCenterCVT+"\t\t"+"See CVT histos\t"+Extension_of_Negative_CVT+NCenterCVT+"\t\t"+NotesCVT;
+String writeEC = Peak_of_EC_electron_SF+"\t"+Peak_of_EC_pi0+"\t"+NotesEC;
+String writeFTOF = "\t\t\t\t\t\t\t\t"+"See RF offsets P1A\t"+"See RF offsets P1B\t"+"\t"+"\t\t";
+String writeHTCC = Photoelectron_Distribution_Peak+"\t"+NotesHTCC;
+String writeCTOF = "\t\t\t"+"See CTOF histos\t\t"+"See CTOF histos\t\t"+"\t\t";
+String writeCND = "\t\t\t"+"See CND histos\t\t"+"See CND histos\t\t"+"\t\t";
+String writeFT = Hodoscope_energy_Peak_1+Hodoscope_energy_Peak_2+"\t"+Hodoscope_time_Peak+"\t"+"See FT histos\t"+"See FT histos\t"+"See FT histos\t\t"+Calorimeter_time_Peak+"\t"+FT_pi0_Peak+"\t"+NotesFT;
+String writeEB = EB_Electron_Center+EB_Pion_Center+EB_Proton_Center+"\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t"+"See EB Beta histos\t\t"+NotesEB;
 
 PrintWriter writer = new PrintWriter("Data_Output_Run_"+args[0]+".txt", "UTF-8");
 
