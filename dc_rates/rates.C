@@ -1,3 +1,9 @@
+//usage 
+// from inside root 
+//string fn="out"
+// .x rates.C
+
+
 {
 	gStyle->SetPalette(1);
 	gStyle->SetOptTitle(kWhite);
@@ -105,12 +111,13 @@
 	
   string filename;
 	for(int c=0; c<NCONF; c++){
-    filename="/Users/biselli/Data/clas12/dc_occ_studies/out.root";
+    //filename="/Users/biselli/Data/clas12/dc_occ_studies/out.root";
+    filename="/Users/biselli/Data/clas12/dc_occ_studies/"+fn+".root";
     //filename+=sconf[c].c_str();
 		//init_dc_histos(Form("/volatile/clas12/ungaro/clas12/root/%s.root", sconf[c].c_str()), c);
     init_dc_histos(filename, c);
   }
-	bar = new TControlBar("vertical", "  Maurizio Ungaro");
+	TControlBar *bar = new TControlBar("vertical", "  Angela  Biselli",3000,1);
 	bar->AddButton("DC Occupancy Rates",  "");
 	bar->AddButton("","");
 	bar->AddButton("Show DC 2D Occupancy",       "show_dc_occ()");
