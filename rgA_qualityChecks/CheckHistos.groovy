@@ -504,6 +504,12 @@ DataFitter.fit(f1p18,h1p18,"LQ");
 	double EB_Proton_Center_Num=f1p18.getParameter(1);
 //System.out.println(f1p18.getParameter(1));
 
+
+//H2F h2p26 = dir.getObject("TBT","hi_phi_neg");
+//H2F h2p27 = dir.getObject("TBT","hi_phi_pos");
+//H2F h2p28 = dir.getObject("TBT","hi_theta_phi_neg");
+//H2F h2p29 = dir.getObject("TBT","hi_theta_phi_pos");
+
 H2F h2p = dir.getObject("FTOF","hi_beta_pos_1");
 H2F h2p2 = dir.getObject("FTOF","hi_beta_pos_2");
 H2F h2p3 = dir.getObject("FTOF","hi_beta_pos_3");
@@ -518,6 +524,13 @@ H2F h2p10 = dir.getObject("FTOF","hi_x_residual_neg_1");
 H2F h2p11 = dir.getObject("FTOF","hi_x_residual_neg_2");
 H2F h2p12 = dir.getObject("FTOF","hi_x_residual_neg_3");
 
+//H2F h2p23 = dir.getObject("FTOF","hi_rf_neg_paddle_1");
+//H2F h2p24 = dir.getObject("FTOF","hi_rf_neg_paddle_2");
+//H2F h2p25 = dir.getObject("FTOF","hi_rf_neg_paddle_3");
+
+//H2F h2p30 = dir.getObject("FT","hi_cal_e_ch");
+//H2F h2p31 = dir.getObject("FT","hi_cal_theta_ch");
+//H2F h2p32 = dir.getObject("FT","hi_cal_phi_ch");
 
 H2F h2p13 = dir.getObject("CTOF","hi_beta_pos");
 //h2p13.setOptStat("1");
@@ -526,6 +539,8 @@ H2F h2p14 = dir.getObject("CTOF","hi_beta_neg");
 H2F h2p15 = dir.getObject("CTOF","hi_z_residual");
 //h2p15.setOptStat("1");
 
+H2F h2p33 = dir.getObject("CTOF","hi_rf_neg_paddle");
+
 H2F h2p16 = dir.getObject("CND","hi_beta_pos");
 //h2p16.setOptStat("1");
 H2F h2p17 = dir.getObject("CND","hi_beta_neg");
@@ -533,18 +548,19 @@ H2F h2p17 = dir.getObject("CND","hi_beta_neg");
 H2F h2p18 = dir.getObject("CND","hi_z_residual");
 //h2p18.setOptStat("1");
 
+H2F h2p34 = dir.getObject("CND","hi_rf_neg_paddle");
+
+
+
 H2F h2p19 = dir.getObject("EB","hi_beta_pos_ftof");
 H2F h2p20 = dir.getObject("EB","hi_beta_neg_ftof");
 H2F h2p21 = dir.getObject("EB","hi_beta_pos_ctof");
 H2F h2p22 = dir.getObject("EB","hi_beta_neg_ctof");
 
-//int
 double x1CVTp= h1p4.getAxis().getBinCenter(xp1);
 //int x1CVTp=xp1;
-//int 
 double x2CVTp= h1p4.getAxis().getBinCenter(xp2);
 //int x2CVTp=xp2;
-//int
 double yCVTp= 2*halfmax1;
 	DataLine line1 = new DataLine(x1CVTp,0.0,x1CVTp,yCVTp);
 	line1.setLineColor(2);
@@ -559,13 +575,11 @@ double yCVTp= 2*halfmax1;
 	//line2.setArrowSizeOrigin(15);
 	//line2.setArrowSizeEnd(15);
 	//line2.setArrowAngle(25);
-//int
+
 double x1CVTn= h1p5.getAxis().getBinCenter(xn1);
 //int x1CVTn=xn1;
-//int
 double x2CVTn= h1p5.getAxis().getBinCenter(xn2);
 //int x2CVTn=xn2;
-//int
 double yCVTn= 2*halfmax2;
 	DataLine line3 = new DataLine(x1CVTn,0.0,x1CVTn,yCVTn);
         line3.setLineColor(2);
@@ -596,18 +610,26 @@ double yCVTn= 2*halfmax2;
 	crosses.getCanvas().draw(dir.getObject("TBT", "hi_vz_pos"));
 	crosses.cd(2);
 	crosses.getCanvas().draw(dir.getObject("CVT", "hi_vz_pos"));
-	//line1.drawLine(x1CVTp,0,x1CVTp,yCVTp);
 	crosses.draw(line1);
 	crosses.draw(line2);
-	//crosses.getCanvas().drawLine(line1);
-	//crosses.getCanvas().drawLine(x2CVTp,0,x2CVTp,yCVTp);
-	//crosses.drawLine(x2CVTp,0,x2CVTp,yCVTp);
 	crosses.cd(3);
 	crosses.getCanvas().draw(dir.getObject("CVT", "hi_vz_neg"));
 	crosses.draw(line3);
 	crosses.draw(line4);
-	//crosses.getCanvas().drawLine(xn1,xn1);
-	//crosses.getCanvas().drawLine(xn2,xn2);
+
+        TCanvas crosses9 = new TCanvas("TBT Sector Population", 1000, 800);
+        crosses9.divide(2,2);
+        crosses9.getCanvas().setGridX(false); crosses9.getCanvas().setGridY(false);
+        crosses9.getCanvas().setAxisFontSize(18);
+        crosses9.getCanvas().setAxisTitleSize(24);
+        crosses9.cd(3);
+        crosses9.getCanvas().draw(dir.getObject("TBT","hi_theta_phi_pos"));
+        crosses9.cd(2);
+        crosses9.getCanvas().draw(dir.getObject("TBT","hi_theta_phi_neg"));
+        crosses9.cd(1);
+        crosses9.getCanvas().draw(dir.getObject("TBT","hi_phi_pos"));
+        crosses9.cd(4);
+        crosses9.getCanvas().draw(dir.getObject("TBT","hi_phi_neg"));
 
 	TCanvas crosses2 = new TCanvas("FTOF beta vs. p", 1000, 800);
 	crosses2.divide(3,2);
@@ -646,6 +668,18 @@ double yCVTn= 2*halfmax2;
 	crosses3.cd(5);
 	crosses3.getCanvas().draw(dir.getObject("FTOF","hi_x_residual_neg_3"));
 
+	TCanvas crosses8 = new TCanvas("FTOF RF negative offset", 1000, 800);
+        crosses8.divide(3,1);
+        crosses8.getCanvas().setGridX(false); crosses8.getCanvas().setGridY(false);
+        crosses8.getCanvas().setAxisFontSize(18);
+        crosses8.getCanvas().setAxisTitleSize(24);
+        crosses8.cd(3);
+        crosses8.getCanvas().draw(dir.getObject("FTOF","hi_rf_neg_paddle_1"));
+        crosses8.cd(1);
+        crosses8.getCanvas().draw(dir.getObject("FTOF","hi_rf_neg_paddle_2"));
+        crosses8.cd(2);
+        crosses8.getCanvas().draw(dir.getObject("FTOF","hi_rf_neg_paddle_3"));
+
 	TCanvas crosses4 = new TCanvas("HTCC and FT", 1000, 800);
 	crosses4.divide(3,2);
 	crosses4.getCanvas().setGridX(false); crosses4.getCanvas().setGridY(false);
@@ -655,16 +689,26 @@ double yCVTn= 2*halfmax2;
 	crosses4.getCanvas().draw(dir.getObject("HTCC", "hi_nphe_ele"));
 	crosses4.cd(2);
 	crosses4.getCanvas().draw(dir.getObject("FT", "hpi0sum"));
-	//crosses4.getCanvas().draw(dir.getObject("CTOF", "hi_z_track"));
 	crosses4.cd(6);
 	crosses4.getCanvas().draw(dir.getObject("FT", "hi_cal_time_cut_ch"));
-	//crosses4.getCanvas().draw(dir.getObject("CND", "hi_z_track"));
 	crosses4.cd(4);
 	crosses4.getCanvas().draw(dir.getObject("FT", "hi_hodo_ematch_l1"));
 	crosses4.cd(5);
 	crosses4.getCanvas().draw(dir.getObject("FT", "hi_hodo_ematch_l2"));
 	crosses4.cd(3);
 	crosses4.getCanvas().draw(dir.getObject("FT", "hi_hodo_tmatch_l2"));
+
+        TCanvas crosses10 = new TCanvas("FT Calorimeter", 1000, 800);
+        crosses10.divide(3,1);
+        crosses10.getCanvas().setGridX(false); crosses10.getCanvas().setGridY(false);
+        crosses10.getCanvas().setAxisFontSize(18);
+        crosses10.getCanvas().setAxisTitleSize(24);
+        crosses10.cd(3);
+        crosses10.getCanvas().draw(dir.getObject("FT","hi_cal_e_ch"));
+        crosses10.cd(1);
+        crosses10.getCanvas().draw(dir.getObject("FT", "hi_cal_theta_ch"));
+        crosses10.cd(2);
+        crosses10.getCanvas().draw(dir.getObject("FT", "hi_cal_phi_ch"));
 
  	TCanvas crosses6 = new TCanvas("CTOF and CND (beta vs. p and residuals)", 1000, 800);
         crosses6.divide(3,2);
@@ -684,17 +728,21 @@ double yCVTn= 2*halfmax2;
         crosses6.cd(5);
         crosses6.getCanvas().draw(dir.getObject("CND","hi_z_residual"));
 
+        TCanvas crosses11 = new TCanvas("CTOF and CND (RF offsets)", 1000, 800);
+        crosses11.divide(2,1);
+        crosses11.getCanvas().setGridX(false); crosses11.getCanvas().setGridY(false);
+        crosses11.getCanvas().setAxisFontSize(18);
+        crosses11.getCanvas().setAxisTitleSize(24);
+        crosses11.cd(1);
+        crosses11.getCanvas().draw(dir.getObject("CTOF","hi_rf_neg_paddle"));
+        crosses11.cd(2);
+        crosses11.getCanvas().draw(dir.getObject("CND","hi_rf_neg_paddle"));
+
 	TCanvas crosses5 = new TCanvas("EB", 1000, 800);
 	crosses5.divide(3,1);
 	crosses5.getCanvas().setGridX(false); crosses5.getCanvas().setGridY(false);
 	crosses5.getCanvas().setAxisFontSize(18);
 	crosses5.getCanvas().setAxisTitleSize(24);
-	//crosses5.cd(6);
-	//crosses5.getCanvas().draw(dir.getObject("FT", "hi_cal_time_cut_ch"));
-	//crosses5.cd(2);
-	//crosses5.getCanvas().draw(dir.getObject("FT", "hpi0sum"));
-	//crosses5.cd(1);
-	//crosses5.getCanvas().draw(dir.getObject("CND", "hi_z_track"));
 	crosses5.cd(1);
 	crosses5.getCanvas().draw(dir.getObject("EB", "hi_vt_el"));
 	crosses5.cd(2);
@@ -726,6 +774,10 @@ String movecommand4="mv HTCC_and_FT_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand5="mv CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand6="mv EB_"+args[0]+".png Images_for_Run_"+args[0];
 String movecommand7="mv EB_Beta_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand8="mv FTOF_RF_Offset_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand9="mv TBT_Sector_Population_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand10="mv FT_Calorimeter_"+args[0]+".png Images_for_Run_"+args[0];
+String movecommand11="mv CTOF_and_CND_RF_offsets_"+args[0]+".png Images_for_Run_"+args[0];
 String movetext="mv Data_Output_Run_"+args[0]+".txt Images_for_Run_"+args[0];
 
 println foldercommand.execute().text;
@@ -739,7 +791,10 @@ println foldercommand.execute().text;
         crosses6.save("CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png");
         crosses5.save("EB_"+args[0]+".png");
         crosses7.save("EB_Beta_"+args[0]+".png");
-
+	crosses8.save("FTOF_RF_Offset_"+args[0]+".png");
+        crosses9.save("TBT_Sector_Population_"+args[0]+".png");
+        crosses10.save("FT_Calorimeter_"+args[0]+".png");
+        crosses11.save("CTOF_and_CND_RF_offsets_"+args[0]+".png");
 
 String NotesTBT;
 	if( Peak_of_Positive_TBT_Num <= -5 || 5 <= Peak_of_Positive_TBT_Num || Peak_of_Negative_TBT_Num <= -5 || 5 <= Peak_of_Negative_TBT_Num  ){
@@ -867,8 +922,14 @@ println movecommand4.execute().text;
 println movecommand5.execute().text;
 println movecommand6.execute().text;
 println movecommand7.execute().text;
+println movecommand8.execute().text;
+println movecommand9.execute().text;
+println movecommand10.execute().text;
+println movecommand11.execute().text;
 //println movetext.execute().text; 
 //println "ls".execute().text;
 
 
 System.out.println("These results are for: "+fileName);
+
+//System.out.println("This line is meant to fail while running this program through a loop. Comment this line out if you don't want the program to crash after saving the images"+ScriptFail);
