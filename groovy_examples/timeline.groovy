@@ -23,7 +23,8 @@ import org.jlab.geom.prim.Vector3D;
 import org.jlab.groot.data.TDirectory;
 
 
-String fileName = "/Users/devita/NetBeansProjects/KPP-Plots/kpp_histos.hipo"
+//String fileName = "/Users/devita/NetBeansProjects/KPP-Plots/kpp_histos.hipo"
+String fileName = "/Users/biselli/Data/clas12/rgA/kpp_histos.4013.hipo"
 
 System.out.println("Opening file: " + fileName);
 TDirectory dir = new TDirectory();
