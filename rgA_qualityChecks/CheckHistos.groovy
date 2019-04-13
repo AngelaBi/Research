@@ -528,8 +528,393 @@ DataFitter.fit(f1p18,h1p18,"LQ");
 //System.out.println("\n\n\n"+f1p18.getParameter(0)*gaus(hMean18,f1p18.getParameter(1),f1p18.getParameter(2))+f1p18.getParameter(3)+f1p18.getParameter(4)*hMean18+f1p18.getParameter(5)*hMean18*hMean18+"\n\n\n");
 
 
-//H2F h2p26 = dir.getObject("TBT","hi_phi_neg");
-//H2F h2p27 = dir.getObject("TBT","hi_phi_pos");
+
+
+
+
+H1F h1p26 = dir.getObject("TBT","hi_phi_neg");
+double hAmp26 = h1p26.getBinContent(h1p26.getMaximumBin());
+
+int xTBT1n;
+
+int foundTBT1n=0;
+int foundTBT2n=0;
+int foundTBT3n=0;
+int foundTBT4n=0;
+int foundTBT5n=0;
+int foundTBT6n=0;
+
+double rangeTBT=0.2;
+int NextSector=17;
+int nrange=2; //double this number and multiply by 3.6 degrees to know the angle range that is being checked on either side of xTBT#
+//int ErrorRangeTBT=3; //same idea as above but if this number is exceeded then there may be an error
+//double xTBTerrorP;
+//double xTBTerrorM;
+
+String TBTResultsN;
+String ErrorTBTSn="";
+int nErrorTBTcheck=0;
+
+
+for (int n=0; n<=100;n++){
+  double h= h1p26.getBinContent(n);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT1n=1;
+      xTBT1n=n;
+   }
+  }
+
+//int NextSector=17;
+
+int xTBT2n=xTBT1n+NextSector;
+
+  if(100<=xTBT2n){
+    xTBT2n=xTBT2n-100;
+  }
+
+int xTBT3n=xTBT2n+NextSector;
+
+  if(100<=xTBT3n){
+    xTBT3n=xTBT3n-100;
+  }
+
+int xTBT4n=xTBT3n+NextSector;
+
+  if(100<=xTBT4n){
+    xTBT4n=xTBT4n-100;
+  }
+
+int xTBT5n=xTBT4n+NextSector;
+
+  if(100<=xTBT5n){
+    xTBT5n=xTBT5n-100;
+  }
+
+int xTBT6n=xTBT5n+NextSector;
+
+  if(100<=xTBT6n){
+    xTBT6n=xTBT6n-100;
+  }
+
+//System.out.println("peaks at: "+xTBT1n+", "+xTBT2n+", "+xTBT3n+", "+xTBT4n+", "+xTBT5n+", and "+xTBT6n+".\n\n");
+
+
+int n2;
+
+for (int n=(xTBT2n-nrange); n<=(xTBT2n+nrange);n++){
+
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p26.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT2n=1;
+ 
+   }
+  }
+
+if(foundTBT2n==0){
+  ErrorTBTSn="The sector at "+h1p26.getAxis().getBinCenter(xTBT2n)+" degrees is missing. "+ErrorTBTSn;
+  nErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT3n-nrange); n<=(xTBT3n+nrange);n++){
+ 
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p26.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT3n=1;
+   }
+  }
+
+if(foundTBT3n==0){
+  ErrorTBTSn="The sector at "+h1p26.getAxis().getBinCenter(xTBT3n)+" degrees is missing. "+ErrorTBTSn;
+  nErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT4n-nrange); n<=(xTBT4n+nrange);n++){
+
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p26.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT4n=1;
+   }
+  }
+
+if(foundTBT4n==0){
+  ErrorTBTSn="The sector at "+h1p26.getAxis().getBinCenter(xTBT4n)+" degrees is missing. "+ErrorTBTSn;
+  nErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT5n-nrange); n<=(xTBT5n+nrange);n++){
+
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p26.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT5n=1;
+   }
+  }
+
+if(foundTBT5n==0){
+  ErrorTBTSn="The sector at "+h1p26.getAxis().getBinCenter(xTBT5n)+" degrees is missing. "+ErrorTBTSn;
+  nErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT6n-nrange); n<=(xTBT6n+nrange);n++){
+
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p26.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp26-(hAmp26*rangeTBT) <= h && h <= hAmp26+(hAmp26*rangeTBT) ){
+      foundTBT6n=1;
+   }
+  }
+
+if(foundTBT6n==0){
+  ErrorTBTSn="The sector at "+h1p26.getAxis().getBinCenter(xTBT6n)+" degrees is missing. "+ErrorTBTSn;
+  nErrorTBTcheck=1;
+  }
+
+if(nErrorTBTcheck==1){
+  ErrorTBTSn="For the Negative TBT Sectors: "+ErrorTBTSn;
+}
+
+TBTResultsN=foundTBT1n+foundTBT2n+foundTBT3n+foundTBT4n+foundTBT5n+foundTBT6n;
+
+
+
+
+
+
+H1F h1p27 = dir.getObject("TBT","hi_phi_pos");
+double hAmp27 = h1p27.getBinContent(h1p27.getMaximumBin());
+
+int xTBT1;
+
+int foundTBT1=0;
+int foundTBT2=0;
+int foundTBT3=0;
+int foundTBT4=0;
+int foundTBT5=0;
+int foundTBT6=0;
+
+String TBTResults;
+String ErrorTBTS="";
+int pErrorTBTcheck=0;
+
+for (int n=0; n<=100;n++){
+  double h= h1p27.getBinContent(n);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT1=1;
+      xTBT1=n;
+   }
+  }
+
+int xTBT2=xTBT1+NextSector;
+
+  if(100<=xTBT2){
+    xTBT2=xTBT2-100;
+  }
+
+int xTBT3=xTBT2+NextSector;
+
+  if(100<=xTBT3){
+    xTBT3=xTBT3-100;
+  }
+
+int xTBT4=xTBT3+NextSector;
+
+  if(100<=xTBT4){
+    xTBT4=xTBT4-100;
+  }
+
+int xTBT5=xTBT4+NextSector;
+
+  if(100<=xTBT5){
+    xTBT5=xTBT5-100;
+  }
+
+int xTBT6=xTBT5+NextSector;
+
+  if(100<=xTBT6){
+    xTBT6=xTBT6-100;
+  }
+
+//System.out.println("peaks at: "+xTBT1+", "+xTBT2+", "+xTBT3+", "+xTBT4+", "+xTBT5+", and "+xTBT6+".\n\n");
+
+
+//int n2;
+//int nrange=4; //double this number and multiply by 3.6 degrees to know the angle range that is being checked on either side of xTBT#
+//int ErrorRangeTBT=3; //same idea as above but if this number is exceeded then there may be an error
+//double xTBTerrorP;
+//double xTBTerrorM;
+
+for (int n=(xTBT2-nrange); n<=(xTBT2+nrange);n++){
+
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p27.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT2=1;
+        
+   }
+  }
+
+if(foundTBT2==0){
+  ErrorTBTS="The sector at "+h1p27.getAxis().getBinCenter(xTBT2)+" degrees is missing. "+ErrorTBTS; 
+  pErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT3-nrange); n<=(xTBT3+nrange);n++){
+    
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p27.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT3=1;
+   }
+  }
+
+if(foundTBT3==0){
+  ErrorTBTS="The sector at "+h1p27.getAxis().getBinCenter(xTBT3)+" degrees is missing. "+ErrorTBTS;
+  pErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT4-nrange); n<=(xTBT4+nrange);n++){
+    
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p27.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT4=1;
+   }
+  }
+
+if(foundTBT4==0){
+  ErrorTBTS="The sector at "+h1p27.getAxis().getBinCenter(xTBT4)+" degrees is missing. "+ErrorTBTS;
+  pErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT5-nrange); n<=(xTBT5+nrange);n++){
+    
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p27.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT5=1;
+   }
+  }
+
+
+if(foundTBT5==0){
+  ErrorTBTS="The sector at "+h1p27.getAxis().getBinCenter(xTBT5)+" degrees is missing. "+ErrorTBTS;
+  pErrorTBTcheck=1;
+  }
+
+for (int n=(xTBT6-nrange); n<=(xTBT6+nrange);n++){
+    
+    if(100<=n){
+      n2=n-100;
+  }
+    else if(n<0){
+      n2=n+100;
+  }
+    else{
+      n2=n;
+    }
+  double h= h1p27.getBinContent(n2);
+  //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
+  if( hAmp27-(hAmp27*rangeTBT) <= h && h <= hAmp27+(hAmp27*rangeTBT) ){
+      foundTBT6=1;
+   }
+  }
+
+if(foundTBT6==0){
+  ErrorTBTS="The sector at "+h1p27.getAxis().getBinCenter(xTBT6)+" degrees is missing. "+ErrorTBTS;
+  pErrorTBTcheck=1;
+  }
+
+if(pErrorTBTcheck==1){
+  ErrorTBTS="For the Positive TBT Sectors: "+ErrorTBTS;
+}
+TBTResults=foundTBT1+foundTBT2+foundTBT3+foundTBT4+foundTBT5+foundTBT6;
+
 //H2F h2p28 = dir.getObject("TBT","hi_theta_phi_neg");
 //H2F h2p29 = dir.getObject("TBT","hi_theta_phi_pos");
 
@@ -807,25 +1192,25 @@ println foldercommand.execute().text;
 //println "ls".execute().text;
 
 
-	crosses.save("TBT_CVT_and_EC_"+args[0]+".png");
-	crosses2.save("FTOF_beta_vs_p_"+args[0]+".png");
-	crosses3.save("FTOF_residuals_"+args[0]+".png");
+	      crosses.save("TBT_CVT_and_EC_"+args[0]+".png");
+      	crosses2.save("FTOF_beta_vs_p_"+args[0]+".png");
+      	crosses3.save("FTOF_residuals_"+args[0]+".png");
         crosses4.save("HTCC_and_FT_"+args[0]+".png");
         crosses6.save("CTOF_and_CND_beta_vs_p_and_residuals_"+args[0]+".png");
         crosses5.save("EB_"+args[0]+".png");
         crosses7.save("EB_Beta_"+args[0]+".png");
-	crosses8.save("FTOF_RF_Offset_"+args[0]+".png");
+      	crosses8.save("FTOF_RF_Offset_"+args[0]+".png");
         crosses9.save("TBT_Sector_Population_"+args[0]+".png");
         crosses10.save("FT_Calorimeter_"+args[0]+".png");
         crosses11.save("CTOF_and_CND_RF_offsets_"+args[0]+".png");
 
-String NotesTBT;
-	if( Peak_of_Positive_TBT_Num <= -5 || 5 <= Peak_of_Positive_TBT_Num || Peak_of_Negative_TBT_Num <= -5 || 5 <= Peak_of_Negative_TBT_Num  ){
-		NotesTBT="Unexpected Data - Check fit/data"+"\t\t";
+String NotesTBT="\t"+ErrorTBTS+ErrorTBTSn+"\t\t";
+	if( Peak_of_Positive_TBT_Num <= -5 || 5 <= Peak_of_Positive_TBT_Num || Peak_of_Negative_TBT_Num <= -5 || 5 <= Peak_of_Negative_TBT_Num || TBTResults <= 5 || TBTResultsN <= 5 ){
+		NotesTBT="Unexpected Data - Check fit/data\t"+ErrorTBTS+ErrorTBTSn+"\t\t";
 	} 
-		else {
-			NotesTBT="\t\t";
-        }
+		//else {
+			//NotesTBT="\t\t\t";
+       // }
 
 String NotesCVT;
         if( PCenterCVT <= -2 || 2 <= PCenterCVT || NCenterCVT <= -2 || 2 <= NCenterCVT || Extension_of_Positive_CVT_Num <= 2 || 8 <= Extension_of_Positive_CVT_Num || Extension_of_Negative_CVT_Num <=2 || 8 <= Extension_of_Negative_CVT_Num ){
@@ -867,7 +1252,7 @@ String NotesEB;
                         NotesEB="\t";
         }
 
-String writeTBT = Peak_of_Positive_TBT+Peak_of_Negative_TBT+"\t"+"See TBT histos\t\t"+NotesTBT;
+String writeTBT = Peak_of_Positive_TBT+Peak_of_Negative_TBT+"\t"+TBTResults+"\t"+TBTResultsN+"\t\t"+NotesTBT;
 String writeCVT = "See CVT histos\t"+Extension_of_Positive_CVT+PCenterCVT+"\t\t"+"See CVT histos\t"+Extension_of_Negative_CVT+NCenterCVT+"\t\t"+NotesCVT;
 String writeEC = Peak_of_EC_electron_SF+"\t"+Peak_of_EC_pi0+"\t"+NotesEC;
 String writeFTOF = "\t\t\t\t\t\t\t\t"+"See RF offsets P1A\t"+"See RF offsets P1B\t"+"\t"+"\t\t";
@@ -952,6 +1337,10 @@ println movecommand11.execute().text;
 //println movetext.execute().text; 
 //println "ls".execute().text;
 
+System.out.println("Number of Positive sectors filled: "+TBTResults+"\n");
+System.out.println("Number of Negative sectors filled: "+TBTResultsN+"\n");
+System.out.println(ErrorTBTS+"\n");
+System.out.println(ErrorTBTSn+"\n");
 
 System.out.println("These results are for: "+fileName);
 
