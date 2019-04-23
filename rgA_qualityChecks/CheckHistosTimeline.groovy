@@ -809,6 +809,18 @@ for (int i = 0; i < listOfFiles.length; i++) {
                           String TBTResultsN;
                           String ErrorTBTSn="";
                           int nErrorTBTcheck=0;
+                           
+                          double TBTsecNegStart = h1p26.getAxis().getBinCenter(0); 
+                          double TBTsecNegEnd = h1p26.getAxis().getBinCenter(99);
+                          double fillLimitn = hAmp26-(hAmp26*rangeTBT);
+                          System.out.println("\n\n\n TBTsecNegStart is: "+TBTsecNegStart+" and TBTsecNegEnd is: "+TBTsecNegEnd+"\n\n\n");                           
+                          F1D f1p26 = new F1D('fit:'+h1p26.getName(), "[amp]",TBTsecNegStart,TBTsecNegEnd);
+                          f1p26.setParameter(0, fillLimitn);
+                          f1p26.setParLimits(0, fillLimitn*0.8, fillLimitn*1.2);
+                          
+                          TBTsectors.cd('/'+fileNumber)
+                          TBTsectors.addDataSet(f1p26)
+                          
                           
                           
                           for (int n=0; n<=100;n++){
@@ -1003,6 +1015,18 @@ for (int i = 0; i < listOfFiles.length; i++) {
                               String TBTResults;
                               String ErrorTBTS="";
                               int pErrorTBTcheck=0;
+                              
+                              double TBTsecPosStart = h1p27.getAxis().getBinCenter(0);
+                              double TBTsecPosEnd = h1p27.getAxis().getBinCenter(99);
+                              double fillLimit = hAmp27-(hAmp27*rangeTBT);
+                              System.out.println("\n\n\n TBTsecPosStart is: "+TBTsecPosStart+" and TBTsecPosEnd is: "+TBTsecPosEnd+"\n\n\n"); 
+                              //F1D f1p27 = new F1D('fit:'+h1p27.getName(), hAmp27-(hAmp27*rangeTBT),TBTsecPosStart,TBTsecPosEnd);
+                              F1D f1p27 = new F1D('fit:'+h1p27.getName(), "[amp]",TBTsecPosStart,TBTsecPosEnd);
+                              f1p27.setParameter(0, fillLimit);
+                              f1p27.setParLimits(0, fillLimit*0.8, fillLimit*1.2);
+                               
+                              TBTsectors.cd('/'+fileNumber)
+                              TBTsectors.addDataSet(f1p27)
                               
                               for (int n=0; n<=100;n++){
                                 double h= h1p27.getBinContent(n);
@@ -1743,7 +1767,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
     String movecommand16="mv FTcalorEnergyTimeline.hipo Hipo_Files_For_Timeline";
     String movecommand17="mv EBbetaAll.hipo Hipo_Files_For_Timeline";
 
-    String movecommandworking="mv Work_in_progress_*.hipo Hipo_Files_For_Timeline";
+    String movecommandworking="mv Work_in_progress_CNDall.hipo Hipo_Files_For_Timeline";
 
             //FTOFall.writeFile('FTOFall.hipo')
             
