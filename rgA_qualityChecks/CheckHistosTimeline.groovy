@@ -119,6 +119,37 @@ EBstartTimeCenter[0] = new GraphErrors('Electron Center')
 EBstartTimeCenter[1] = new GraphErrors('Pion Center')
 EBstartTimeCenter[2] = new GraphErrors('Proton Center')
 
+
+def FTOFall = new TDirectory()
+//def FTOFallCount = new GraphErrors[3]
+//FTOFallCount[0] = new GraphErrors('Peak Counts E')
+def FTOFallExist = new GraphErrors[1]
+FTOFallExist[0] = new GraphErrors('Use to search run numbers')
+
+def CTOFall = new TDirectory()
+//def CTOFallCount = new GraphErrors[3]
+//CTOFallCount[0] = new GraphErrors('Peak Counts E')
+def CTOFallExist = new GraphErrors[1]
+CTOFallExist[0] = new GraphErrors('Use to search run numbers')
+
+def CNDall = new TDirectory()
+//def CNDallCount = new GraphErrors[1]
+//CNDallCount[0] = new GraphErrors('Peak Counts Residuals')
+def CNDallExist = new GraphErrors[1]
+CNDallExist[0] = new GraphErrors('Use to search run numbers')
+
+def FTcalorEnergyTimeline = new TDirectory()
+def FTcalorEnergyTLCount = new GraphErrors[3]
+FTcalorEnergyTLCount[0] = new GraphErrors('Peak Counts E')
+FTcalorEnergyTLCount[1] = new GraphErrors('Peak Counts theta')
+FTcalorEnergyTLCount[2] = new GraphErrors('Peak Counts phi')
+
+def EBbetaAll = new TDirectory()
+//def EBbetaAllCount = new GraphErrors[4]
+//EBbetaAllCount[0] = new GraphErrors('Peak Counts E')
+def EBbetaAllExist = new GraphErrors[1]
+EBbetaAllExist[0] = new GraphErrors('Use to search run numbers')
+
 int fileNumber;
 int filecount=0;
 for (int i = 0; i < listOfFiles.length; i++) {
@@ -143,7 +174,12 @@ for (int i = 0; i < listOfFiles.length; i++) {
     FTcalorTime.mkdir('/'+fileNumber)
     FTpi0.mkdir('/'+fileNumber)
     EBstartTime.mkdir('/'+fileNumber)
-    
+    FTOFall.mkdir('/'+fileNumber)
+    CTOFall.mkdir('/'+fileNumber)
+    CNDall.mkdir('/'+fileNumber)
+    FTcalorEnergyTimeline.mkdir('/'+fileNumber)
+    EBbetaAll.mkdir('/'+fileNumber)
+
     //System.out.println("Opening file: " + fileName;
     //TDirectory dir = new TDirectory();
     //dir.readFile(fileName);
@@ -254,7 +290,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
         for (int n=0; n<=100;n++){
           double h= h1p4.getBinContent(n);
           //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p4.getAxis().getBinCenter(n));
-          if( halfmax1-(halfmax1*0.15) <= h && h <= halfmax1+(halfmax1*0.15) ){
+          if( halfmax1-(halfmax1*0.20) <= h && h <= halfmax1+(halfmax1*0.20) ){
             if(found1==0){
               xp1=n;
               found1=1;
@@ -328,7 +364,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
         for (int n=0; n<=100;n++){
           double h= h1p5.getBinContent(n);
           //System.out.println("n is:"+n+" and hn= "+h+" and xn= "+h1p5.getAxis().getBinCenter(n));
-          if( halfmax2-(halfmax2*0.15) <= h && h <= halfmax2+(halfmax2*0.15) ){
+          if( halfmax2-(halfmax2*0.20) <= h && h <= halfmax2+(halfmax2*0.20) ){
             if(found2==0){
               xn1=n;
               found2=1;
@@ -460,10 +496,13 @@ for (int i = 0; i < listOfFiles.length; i++) {
 
         H1F h1p9 = dir.getObject("CTOF", "hi_z_track");
         h1p9.setOptStat("1101");
+               CTOFall.cd('/'+fileNumber)
+               CTOFall.addDataSet(h1p9)
         double hAmp9  = h1p9.getBinContent(h1p9.getMaximumBin());
         double hMean9 = h1p9.getAxis().getBinCenter(h1p9.getMaximumBin());
         //double hRMS  = 10;
-        F1D f1p9 = new F1D("CTOF residuals", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
+        //F1D f1p9 = new F1D("CTOF residuals", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
+        F1D f1p9 = new F1D('fit:'+h1p9.getName(), "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
         f1p9.setOptStat("1111111");
         f1p9.setLineColor(2);
         f1p9.setParameter(0, hAmp9);
@@ -473,30 +512,38 @@ for (int i = 0; i < listOfFiles.length; i++) {
         f1p9.setParameter(2, 2.0);
         f1p9.setParameter(3, 0.0);
         f1p9.setParameter(4, 0.0);
+               CTOFall.cd('/'+fileNumber)
+               CTOFall.addDataSet(f1p9)
         DataFitter.fit(f1p9,h1p9,"LQ");
         //System.out.println("Photoelectron Distribution Peak: ");
         //System.out.println(f1p9.getParameter(1));
 
         //System.out.println("\n");
 
-        H1F h1p10 = dir.getObject("CND", "hi_z_track");
-        h1p10.setOptStat("1101");
-        double hAmp10  = h1p10.getBinContent(h1p10.getMaximumBin());
-        double hMean10 = h1p10.getAxis().getBinCenter(h1p10.getMaximumBin());
-        //double hRMS  = 10;
-        F1D f1p10 = new F1D("CND residuals", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
-        f1p10.setOptStat("1111111");
-        f1p10.setLineColor(2);
-        f1p10.setParameter(0, hAmp10);
-        f1p10.setParLimits(0, hAmp10*0.8, hAmp10*1.2);
-        f1p10.setParameter(1, hMean10);
-        f1p10.setParLimits(1, hMean10-hRMS, hMean10+hRMS);
-        f1p10.setParameter(2, 2.0);
-        f1p10.setParameter(3, 0.0);
-        f1p10.setParameter(4, 0.0);
-        DataFitter.fit(f1p10,h1p10,"LQ");
-        //System.out.println("Photoelectron Distribution Peak: ");
-        //System.out.println(f1p10.getParameter(1));
+//        H1F h1p10 = dir.getObject("CND", "hi_z_track");
+//        h1p10.setOptStat("1101");
+//               CNDall.cd('/'+fileNumber)
+//               CNDall.addDataSet(h1p10)
+//        double hAmp10  = h1p10.getBinContent(h1p10.getMaximumBin());
+//        double hMean10 = h1p10.getAxis().getBinCenter(h1p10.getMaximumBin());
+//        //double hRMS  = 10;
+//        //F1D f1p10 = new F1D("CND residuals", "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
+//        F1D f1p10 = new F1D('fit:'+h1p10.getName(), "[amp]*gaus(x,[peak],[sigma])+[p0]+[p1]*x+[p2]*x*x", -10.0,38.0);
+//        f1p10.setOptStat("1111111");
+//        f1p10.setLineColor(2);
+//        f1p10.setParameter(0, hAmp10);
+//        f1p10.setParLimits(0, hAmp10*0.8, hAmp10*1.2);
+//        f1p10.setParameter(1, hMean10);
+//        f1p10.setParLimits(1, hMean10-hRMS, hMean10+hRMS);
+//        f1p10.setParameter(2, 2.0);
+//        f1p10.setParameter(3, 0.0);
+//        f1p10.setParameter(4, 0.0);
+//               CNDall.cd('/'+fileNumber)
+//               CNDall.addDataSet(f1p10)
+//        DataFitter.fit(f1p10,h1p10,"LQ");
+//        //System.out.println("Photoelectron Distribution Peak: ");
+//        //System.out.println(f1p10.getParameter(1));
+//               CNDallCount[0].addPoint(fileNumber, hAmp10, 0, 0)
 
         //System.out.println("\n");
 
@@ -690,7 +737,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
         f1p17.setParameter(0, hAmp17);
         f1p17.setParLimits(0, hAmp17*0.8, hAmp17*1.2);
         //f1p17.setParLimits(0, hAmp17*0.6, hAmp17*1.1);
-        System.out.println("\n\n\nWARNING(amp pion): "+hAmp17+", "+hAmp17*0.8+", "+hAmp17*1.2+"\n\n\n");
+        //System.out.println("\n\n\nWARNING(amp pion): "+hAmp17+", "+hAmp17*0.8+", "+hAmp17*1.2+"\n\n\n");
         f1p17.setParameter(1, hMean17);
         f1p17.setParLimits(1, hMean17-hRMS17, hMean17+hRMS17);
         f1p17.setParameter(2, 2.0);
@@ -1179,6 +1226,18 @@ for (int i = 0; i < listOfFiles.length; i++) {
         H2F h2p4 = dir.getObject("FTOF","hi_beta_neg_1");
         H2F h2p5 = dir.getObject("FTOF","hi_beta_neg_2");
         H2F h2p6 = dir.getObject("FTOF","hi_beta_neg_3");
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p2)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p3)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p4)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p5)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p6)
 
         H2F h2p7 = dir.getObject("FTOF","hi_x_residual_pos_1");
         H2F h2p8 = dir.getObject("FTOF","hi_x_residual_pos_2");
@@ -1186,14 +1245,44 @@ for (int i = 0; i < listOfFiles.length; i++) {
         H2F h2p10 = dir.getObject("FTOF","hi_x_residual_neg_1");
         H2F h2p11 = dir.getObject("FTOF","hi_x_residual_neg_2");
         H2F h2p12 = dir.getObject("FTOF","hi_x_residual_neg_3");
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p7)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p8)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p9)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p10)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p11)
+             FTOFall.cd('/'+fileNumber)
+             FTOFall.addDataSet(h2p12)
 
         //H2F h2p23 = dir.getObject("FTOF","hi_rf_neg_paddle_1");
         //H2F h2p24 = dir.getObject("FTOF","hi_rf_neg_paddle_2");
         //H2F h2p25 = dir.getObject("FTOF","hi_rf_neg_paddle_3");
 
-        //H2F h2p30 = dir.getObject("FT","hi_cal_e_ch");
-        //H2F h2p31 = dir.getObject("FT","hi_cal_theta_ch");
-        //H2F h2p32 = dir.getObject("FT","hi_cal_phi_ch");
+        H1F h1p30 = dir.getObject("FT","hi_cal_e_ch");
+        double hAmp30 = h1p30.getBinContent(h1p30.getMaximumBin());
+        H1F h1p31 = dir.getObject("FT","hi_cal_theta_ch");
+        double hAmp31 = h1p31.getBinContent(h1p31.getMaximumBin());
+        H1F h1p32 = dir.getObject("FT","hi_cal_phi_ch");
+        double hAmp32 = h1p32.getBinContent(h1p32.getMaximumBin());
+
+             FTcalorEnergyTimeline.cd('/'+fileNumber)
+             FTcalorEnergyTimeline.addDataSet(h1p30)
+             FTcalorEnergyTLCount[0]
+
+             FTcalorEnergyTimeline.cd('/'+fileNumber)
+             FTcalorEnergyTimeline.addDataSet(h1p31)
+
+             FTcalorEnergyTimeline.cd('/'+fileNumber)
+             FTcalorEnergyTimeline.addDataSet(h1p32)
+
+
+             FTcalorEnergyTLCount[0].addPoint(fileNumber, hAmp30, 0, 0)
+             FTcalorEnergyTLCount[1].addPoint(fileNumber, hAmp31, 0, 0)
+             FTcalorEnergyTLCount[2].addPoint(fileNumber, hAmp32, 0, 0)
 
         H2F h2p13 = dir.getObject("CTOF","hi_beta_pos");
         //h2p13.setOptStat("1");
@@ -1204,6 +1293,17 @@ for (int i = 0; i < listOfFiles.length; i++) {
 
         H2F h2p33 = dir.getObject("CTOF","hi_rf_neg_paddle");
 
+
+             CTOFall.cd('/'+fileNumber)
+             CTOFall.addDataSet(h2p13)
+             CTOFall.cd('/'+fileNumber)
+             CTOFall.addDataSet(h2p14)
+             CTOFall.cd('/'+fileNumber)
+             CTOFall.addDataSet(h2p15)
+             CTOFall.cd('/'+fileNumber)
+             CTOFall.addDataSet(h2p33)
+
+
         H2F h2p16 = dir.getObject("CND","hi_beta_pos");
         //h2p16.setOptStat("1");
         H2F h2p17 = dir.getObject("CND","hi_beta_neg");
@@ -1213,12 +1313,30 @@ for (int i = 0; i < listOfFiles.length; i++) {
 
         H2F h2p34 = dir.getObject("CND","hi_rf_neg_paddle");
 
-
-
+             CNDall.cd('/'+fileNumber)
+             CNDall.addDataSet(h2p16)
+             CNDall.cd('/'+fileNumber)
+             CNDall.addDataSet(h2p17)
+             CNDall.cd('/'+fileNumber)
+             CNDall.addDataSet(h2p18)
+             CNDall.cd('/'+fileNumber)
+             CNDall.addDataSet(h2p34)
+             
+             CNDallExist[0].addPoint(fileNumber, 1, 0, 0)
+             
         H2F h2p19 = dir.getObject("EB","hi_beta_pos_ftof");
         H2F h2p20 = dir.getObject("EB","hi_beta_neg_ftof");
         H2F h2p21 = dir.getObject("EB","hi_beta_pos_ctof");
         H2F h2p22 = dir.getObject("EB","hi_beta_neg_ctof");
+              
+             EBbetaAll.cd('/'+fileNumber)
+             EBbetaAll.addDataSet(h2p19)
+             EBbetaAll.cd('/'+fileNumber)
+             EBbetaAll.addDataSet(h2p20)
+             EBbetaAll.cd('/'+fileNumber)
+             EBbetaAll.addDataSet(h2p21)
+             EBbetaAll.cd('/'+fileNumber)
+             EBbetaAll.addDataSet(h2p22)
 
         double x1CVTp= h1p4.getAxis().getBinCenter(xp1);
         //int x1CVTp=xp1;
@@ -1617,7 +1735,37 @@ for (int i = 0; i < listOfFiles.length; i++) {
     String movecommand10="mv FTpi0.hipo Hipo_Files_For_Timeline";
     String movecommand11="mv EBstartTime.hipo Hipo_Files_For_Timeline";
     String movecommand12="mv ECpi0.hipo Hipo_Files_For_Timeline";
+    String movecommand13="mv FTOFall.hipo Hipo_Files_For_Timeline";
+    String movecommand14="mv CTOFall.hipo Hipo_Files_For_Timeline";
+    String movecommand15="mv CNDall.hipo Hipo_Files_For_Timeline";
+    String movecommand16="mv FTcalorEnergyTimeline.hipo Hipo_Files_For_Timeline";
+    String movecommand17="mv EBbetaAll.hipo Hipo_Files_For_Timeline";
 
+    String movecommandworking="mv Work_in_progress_*.hipo Hipo_Files_For_Timeline";
+
+            //FTOFall.writeFile('FTOFall.hipo')
+            
+            //CTOFall.writeFile('CTOFall.hipo')
+
+            CNDall.mkdir('/timelines')
+            CNDall.cd('/timelines')
+            //CNDall.addDataSet(CNDallCount[0])
+            CNDall.addDataSet(CNDallExist[0])
+            
+            //CNDall.writeFile('CNDall.hipo')
+            CNDall.writeFile('Work_in_progress_CNDall.hipo')
+
+            FTcalorEnergyTimeline.mkdir('/timelines')
+            FTcalorEnergyTimeline.cd('/timelines')
+            FTcalorEnergyTimeline.addDataSet(FTcalorEnergyTLCount[0])
+            FTcalorEnergyTimeline.addDataSet(FTcalorEnergyTLCount[1])
+            FTcalorEnergyTimeline.addDataSet(FTcalorEnergyTLCount[2])
+            
+            FTcalorEnergyTimeline.writeFile('FTcalorEnergyTimeline.hipo')
+            
+            //EBbetaAll.writeFile('EBbetaAll.hipo')
+            
+            
             TBTvertex.mkdir('/timelines')
             TBTvertex.cd('/timelines')
             TBTvertex.addDataSet(TBTvertexPeak[0])
@@ -1710,6 +1858,11 @@ for (int i = 0; i < listOfFiles.length; i++) {
                   println movecommand10.execute().text;
                   println movecommand11.execute().text;
                   println movecommand12.execute().text;
+                  println movecommand13.execute().text;
+                  println movecommand14.execute().text;
+                  println movecommand15.execute().text;
+                  println movecommand16.execute().text;
+                  println movecommand17.execute().text;
 
 System.out.println("\n"+" The number of files analyzed was: "+filecount);
 
