@@ -48,10 +48,12 @@ import org.jlab.groot.ui.PaveText;
 
 
 File folder = new File("/Users/einstein/hipoFilesKPP/");
+//File folder = new File("/home/richcap/Desktop/KppHistosFiles/KPPpass0_fullMap_alignprod_hipo_files/");
 File[] listOfFiles = folder.listFiles();
 
 
 String directoryName="/Users/einstein/hipoFilesKPP/";
+//String directoryName="/home/richcap/Desktop/KppHistosFiles/KPPpass0_fullMap_alignprod_hipo_files/";
 String fileNames;
 
 //output hipo files
@@ -1863,6 +1865,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
                   println movecommand15.execute().text;
                   println movecommand16.execute().text;
                   println movecommand17.execute().text;
+                  println movecommandworking.execute().text;
 
 System.out.println("\n"+" The number of files analyzed was: "+filecount);
 
