@@ -801,7 +801,7 @@ for (int i = 0; i < listOfFiles.length; i++) {
                           
                           double rangeTBT=0.2;
                           int NextSector=17;
-                          int nrange=2; //double this number and multiply by 3.6 degrees to know the angle range that is being checked on either side of xTBT#
+                          int nrange=3; //double this number and multiply by 3.6 degrees to know the angle range that is being checked on either side of xTBT#
                           //int ErrorRangeTBT=3; //same idea as above but if this number is exceeded then there may be an error
                           //double xTBTerrorP;
                           //double xTBTerrorM;
