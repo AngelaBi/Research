@@ -6,12 +6,19 @@ void print_all()
 	{
 		SECT = s;
 		CONF = 0;
-		show_dc_occ();
+//		show_dc_occ();
 //		CONF = 1;
 //		show_dc_occ();
 	}
-	PRINT = "";
-
+  
+  for(int z=0; z<NZONES; z++){
+    ZONE=z;
+    show_vertex();
+  }
+  show_zvertex();
+  show_dc_int_occ();	
+  PRINT = "";
+  
 }
 
 void change_sector()
