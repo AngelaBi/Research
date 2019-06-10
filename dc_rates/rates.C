@@ -66,6 +66,7 @@
 	string sreg[NREG] = {"reg1", "reg2", "reg3"};
 	int REG = 0;
 	
+	double factordatasimu[NREG] = {500./250.,1400./250.,1200./500   };  // additional factor to scale the different configurations
 	// near target
 	zlimits[0][0][0] = -10;    zlimits[0][1][0] =  150;
 	zlimits[2][0][0] = -100;   zlimits[2][1][0] = 1000;

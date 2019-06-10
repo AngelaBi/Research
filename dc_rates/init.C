@@ -177,7 +177,7 @@ void init_dc_histos(string filename, int cindex)
 				string histSum   = Form("sector - 0.5 >> dc_occ_summary_r%d_E%s_%s", r+1, SEDEP[e].c_str(), sconf[cindex].c_str());
 				dc->Draw(histSum.c_str(), allCuts.c_str());
 				dc_occ_summary[r][e][cindex]->Sumw2();
-				dc_occ_summary[r][e][cindex]->Scale(100*factor[cindex]*(TWINDOWR[r]/TWINDOW)/(NHITS*nwires*nlayers));
+				dc_occ_summary[r][e][cindex]->Scale(100*factor[cindex]*factordatasimu[r]*(TWINDOWR[r]/TWINDOW)/(NHITS*nwires*nlayers));
 				dc_occ_summary[r][e][cindex]->SetDirectory(0);
 			}
 
