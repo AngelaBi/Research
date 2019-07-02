@@ -75,7 +75,7 @@ void show_dc_int_occ()
 
 		// manually setting max
 		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(max);
-		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(5);
+		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(2);
 
 //		if(CONF==2)
 //			dc_occ_summary[r][ENERGY][CONF]->SetMaximum(2);
@@ -136,7 +136,7 @@ void show_dc_int_occ()
 	sprintf(r2label, "Region2: %3.2f%% * %f = %3.2f", intocc[1]/factor[CONF],  factor[CONF], r2Occ);
 	sprintf(r3label, "Region3: %3.2f%% * %f = %3.2f", intocc[2]/factor[CONF],  factor[CONF], r3Occ);
 
-	TLegend *tmodels  = new TLegend(0.5, 0.6, 0.8,  0.8);
+	TLegend *tmodels  = new TLegend(0.6, 0.7, 0.9,  0.9);
 	tmodels->AddEntry(dc_occ_summary[0][ENERGY][CONF], r1label,  "P");
 	tmodels->AddEntry(dc_occ_summary[1][ENERGY][CONF], r2label,  "P");
 	tmodels->AddEntry(dc_occ_summary[2][ENERGY][CONF], r3label,  "P");
@@ -180,7 +180,7 @@ void show_zvertex()
   dc_zver[ENERGY][CONF][REG][4]->SetLineColor(kOrange);
 	dc_zver[ENERGY][CONF][REG][5]->SetLineColor(kYellow-3);
 
-	dc_zver[ENERGY][CONF][REG][0]->SetMaximum(1);
+	dc_zver[ENERGY][CONF][REG][0]->SetMaximum(1.1);
 	dc_zver[ENERGY][CONF][REG][0]->SetMinimum(0.005);
 
 
