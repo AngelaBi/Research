@@ -91,6 +91,7 @@ void show_dc_int_occ()
 	
 	
 	double intocc[3];
+  double intoccs1[3];
 	for(int r=0; r<3; r++)
 	{
 		
@@ -106,6 +107,7 @@ void show_dc_int_occ()
 	for(int r=0; r<3; r++)
 	{
 		dc_occ_summary[r][ENERGY][CONF]->Draw("sameP");
+    intoccs1[r]=dc_occ_summary[r][ENERGY][CONF]->GetBinContent(1);
 	}
 	
 	lab.SetTextSize(0.045);
@@ -153,6 +155,11 @@ void show_dc_int_occ()
 			rates->Print(Form("img/conf-%s_plot-intocc.%s", sconf[CONF].c_str(), PRINT.c_str() ) );
 	}
   //rates->Print(Form("summaryOcc_%s.jpg",fn.c_str()));
+  cout<<"Average occupacies"<<endl;
+  cout<<"{"<<r1Occ<<","<<r2Occ<<","<<r3Occ<<"}"<<endl;
+  cout<<"Average occupacies s1"<<endl;
+  cout<<"{"<<intoccs1[0]<<","<<intoccs1[1]<<","<<intoccs1[2]<<"}"<<endl;
+
 }
 
 
