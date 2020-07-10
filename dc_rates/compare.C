@@ -1,0 +1,30 @@
+void compare(string conf1,string conf2,string type){
+ string file1=conf1+"_results.root"; 
+ string file2=conf2+"_results.root"; 
+ string hname1="dc_ver_EtotEdep > 50 eV_"+conf1+"_"+type+"_r1";
+ string hname2="dc_ver_EtotEdep > 50 eV_"+conf2+"_"+type+"_r1";
+  cout<<file1<<endl;
+//TFile *f=new TFile("seb.root");
+//TFile *f2=new TFile("seb_old.root");
+//TH2F *h1=(TH2F*)f->Get("dc_ver_EtotEdep > 50 eV_clas12_zall_r1");
+//TH2F *h12=(TH2F*)f2->Get("dc_ver_EtotEdep > 50 eV_clas12_zall_r1");
+TFile *f=new TFile(file1.c_str());
+TFile *f2=new TFile(file2.c_str());
+TH2F *h1=(TH2F*)f->Get(hname1.c_str());
+TH2F *h12=(TH2F*)f2->Get(hname2.c_str());
+TH2F *diff=new TH2F("diff","diff",h1->GetNbinsX(),h1->GetXaxis()->GetXmin(),h1->GetXaxis()->GetXmax(),h1->GetNbinsY(),h1->GetYaxis()->GetXmin(),h1->GetYaxis()->GetXmax());
+diff->Add(h1,h12,+1,-1);
+TCanvas *c=new TCanvas();
+c->Divide(2,2);
+c->cd(1);
+gPad->SetLogz();
+h1->Draw("colz");
+c->cd(2);
+gPad->SetLogz();
+h12->Draw("colz");
+c->cd(3);
+gPad->SetLogz();
+diff->Draw("colz");
+c->cd(4);
+diff->Draw("lego");
+}
