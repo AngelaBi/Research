@@ -75,7 +75,7 @@ void show_dc_int_occ()
 
 		// manually setting max
 		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(max);
-		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(6);
+		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(15);
 
 //		if(CONF==2)
 //			dc_occ_summary[r][ENERGY][CONF]->SetMaximum(2);

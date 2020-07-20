@@ -24,7 +24,7 @@
 	//string sconf[NCONF]  = { "clas12", "clas12VE", };
 	//double factor[NCONF] = {   1, 1};  // additional factor to scale the different configurations
 	const int NCONF      = 1;
-	string sconf[NCONF]  = { "clas12" };
+	string sconf[NCONF]  = { (fn).c_str() };
 	double factor[NCONF] = {   1};  // additional factor to scale the different configurations
 
       	
@@ -70,7 +70,7 @@
 	// near target
 	zlimits[0][0][0] = -10;    zlimits[0][1][0] =  150;
 	zlimits[2][0][0] = -100;   zlimits[2][1][0] = 1000;
-	
+	//TEMP -100, 1000
 	// beampipe
 	zlimits[0][0][1] = -100;   zlimits[0][1][1] = 1400;
 	zlimits[2][0][1] = -100;   zlimits[2][1][1] = 1600;

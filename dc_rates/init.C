@@ -260,7 +260,7 @@ dc_zver[e][cindex][r][p]->SetDirectory(0);
 
 
 		// writing out to file1
-		string ofname =   sconf[cindex] + ".root";
+		string ofname =   sconf[cindex] + "_results.root";
 		cout << " Opening file for writing: " << ofname << endl;
 		TFile of(ofname.c_str(), "RECREATE");
 		for(int e=0; e<NENERGY; e++)
