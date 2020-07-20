@@ -13,7 +13,7 @@ lh2ftoff,lh2ftoffshift=[],[]
 apolloftoff,apolloftoffshift=[],[]
 apolloelmo,apolloelmoshift=[],[]
 
-with open('/Users/biselli/Downloads/rates.csv') as csv_file:
+with open('/Users/biselli//Data/clas12/dc_occ_studies/rates.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
@@ -39,14 +39,14 @@ with open('/Users/biselli/Downloads/rates.csv') as csv_file:
                 apolloelmoshift.append(float(row[6]))
             line_count += 1
     print(f'Processed {line_count} lines.')
-    print(lh2ftoffshift,lh2ftoff)
+    print(apolloelmoshift,apolloelmo)
     
     
     
     fig, ax = plt.subplots(figsize=(7, 5))
     
-    ax.set_xlabel("Region 1 occupancies [%]")
-    ax.set_ylabel("Shift [mm]")
+    ax.set_ylabel("Region 1 occupancies [%]")
+    ax.set_xlabel("Shift [mm]")
     
     ax.set_xlim(-1, 11.)
     ax.set_ylim(-1., 14.)
