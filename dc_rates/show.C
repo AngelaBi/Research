@@ -38,7 +38,7 @@ void show_dc_occ()
 			rates1->Print(Form("img/conf-%s_zone-%s_plot-occ_region-3.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
 		}
 	}
-rates1->Print(Form("HitProbSector%d_%s.jpg", SECT+1,fn.c_str()));
+//rates1->Print(Form("HitProbSector%d_%s.jpg", SECT+1,fn.c_str()));
 }
 
 
@@ -75,7 +75,7 @@ void show_dc_int_occ()
 
 		// manually setting max
 		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(max);
-		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(3);
+		dc_occ_summary[r][ENERGY][CONF]->SetMaximum(6);
 
 //		if(CONF==2)
 //			dc_occ_summary[r][ENERGY][CONF]->SetMaximum(2);
@@ -91,6 +91,7 @@ void show_dc_int_occ()
 	
 	
 	double intocc[3];
+  double intoccs1[3];
 	for(int r=0; r<3; r++)
 	{
 		
@@ -106,6 +107,7 @@ void show_dc_int_occ()
 	for(int r=0; r<3; r++)
 	{
 		dc_occ_summary[r][ENERGY][CONF]->Draw("sameP");
+    intoccs1[r]=dc_occ_summary[r][ENERGY][CONF]->GetBinContent(1);
 	}
 	
 	lab.SetTextSize(0.045);
@@ -136,7 +138,7 @@ void show_dc_int_occ()
 	sprintf(r2label, "Region2: %3.2f%% * %f = %3.2f", intocc[1]/factor[CONF],  factor[CONF], r2Occ);
 	sprintf(r3label, "Region3: %3.2f%% * %f = %3.2f", intocc[2]/factor[CONF],  factor[CONF], r3Occ);
 
-	TLegend *tmodels  = new TLegend(0.5, 0.6, 0.8,  0.8);
+	TLegend *tmodels  = new TLegend(0.6, 0.7, 0.9,  0.9);
 	tmodels->AddEntry(dc_occ_summary[0][ENERGY][CONF], r1label,  "P");
 	tmodels->AddEntry(dc_occ_summary[1][ENERGY][CONF], r2label,  "P");
 	tmodels->AddEntry(dc_occ_summary[2][ENERGY][CONF], r3label,  "P");
@@ -145,13 +147,19 @@ void show_dc_int_occ()
 	tmodels->Draw();
 	
 	if(PRINT != "") {
-		for(int z=0; z<NZONES; z++){
-			rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-1.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
-			rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-2.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
-			rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-3.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
-		}
+	//	for(int z=0; z<NZONES; z++){
+	//		rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-1.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
+	//		rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-2.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
+	//		rates->Print(Form("img/conf-%s_zone-%s_plot-intocc_region-3.%s", sconf[CONF].c_str(), SZONE[z].c_str(), PRINT.c_str() ) );
+	//	}
+			rates->Print(Form("img/conf-%s_plot-intocc.%s", sconf[CONF].c_str(), PRINT.c_str() ) );
 	}
-rates->Print(Form("summaryOcc_%s.jpg",fn.c_str()));
+  //rates->Print(Form("summaryOcc_%s.jpg",fn.c_str()));
+  cout<<"Average occupacies"<<endl;
+  cout<<"{"<<r1Occ<<","<<r2Occ<<","<<r3Occ<<"}"<<endl;
+  cout<<"Average occupacies s1"<<endl;
+  cout<<"{"<<intoccs1[0]<<","<<intoccs1[1]<<","<<intoccs1[2]<<"}"<<endl;
+
 }
 
 
@@ -176,19 +184,19 @@ void show_zvertex()
 	dc_zver[ENERGY][CONF][REG][1]->SetLineColor(kRed);
 	dc_zver[ENERGY][CONF][REG][2]->SetLineColor(kBlue);
 	dc_zver[ENERGY][CONF][REG][3]->SetLineColor(kGreen+2);
-	dc_zver[ENERGY][CONF][REG][4]->SetLineColor(kOrange);
+  dc_zver[ENERGY][CONF][REG][4]->SetLineColor(kOrange);
 	dc_zver[ENERGY][CONF][REG][5]->SetLineColor(kYellow-3);
 
-	dc_zver[ENERGY][CONF][REG][0]->SetMaximum(1);
+	dc_zver[ENERGY][CONF][REG][0]->SetMaximum(1.1);
 	dc_zver[ENERGY][CONF][REG][0]->SetMinimum(0.005);
 
 
-	dc_zver[ENERGY][CONF][REG][0]->Draw("");
-	dc_zver[ENERGY][CONF][REG][1]->Draw("same");
-	dc_zver[ENERGY][CONF][REG][2]->Draw("same");
-	dc_zver[ENERGY][CONF][REG][3]->Draw("same");
-	dc_zver[ENERGY][CONF][REG][4]->Draw("same");
-	dc_zver[ENERGY][CONF][REG][5]->Draw("same");
+	dc_zver[ENERGY][CONF][REG][0]->Draw("hist");
+	dc_zver[ENERGY][CONF][REG][1]->Draw("hist same");
+	dc_zver[ENERGY][CONF][REG][2]->Draw("hist same");
+	dc_zver[ENERGY][CONF][REG][3]->Draw("hist same");
+	dc_zver[ENERGY][CONF][REG][4]->Draw("hist same");
+	dc_zver[ENERGY][CONF][REG][5]->Draw("hist same");
 	
 	
 	lab.SetNDC(1);
@@ -236,14 +244,15 @@ void show_zvertex()
 	ulGraph->Draw("Psame");
 	
 	if(PRINT != "")
-	for(int z=0; z<NZONES; z++){
-		rates1->Print(Form("img/conf-%s_zone-%s_plot-zvertex_region-%d.%s", sconf[CONF].c_str(), SZONE[z].c_str(),  REG+1, PRINT.c_str() ) );
-	}
-
-	for(int z=0; z<NZONES; z++){
-
-rates1->Print(Form("zone-%s_plot-zvertex_region-%d.jpg",  SZONE[z].c_str(),  REG+1 ) );
-	}
+    rates1->Print(Form("img/conf-%s_zone-%s_plot-zvertex_region-%d.%s", sconf[CONF].c_str(), SZONE[ZONE].c_str(),  REG+1, PRINT.c_str() ) );
+//	for(int z=0; z<NZONES; z++){
+//  cout<<"Show vertex"<<NZONES<<endl;
+//	}
+//  cout<<"Show vertex"<<NZONES<<endl;
+//	for(int z=0; z<NZONES; z++){
+//    cout<<z<<" "<<SZONE[z].c_str()<<endl;
+//    rates1->Print(Form("zone-%s_plot-zvertex_region-%d.jpg",  SZONE[z].c_str(),  REG+1 ) );
+//	}
 
 }
 
@@ -325,7 +334,10 @@ void show_vertex()
 	if(PRINT != "")
     rates1->Print(Form("img/conf-%s_zone-%s_plot-vertex_region-%d.%s", sconf[CONF].c_str(),  SZONE[ZONE].c_str(), REG+1, PRINT.c_str() ) );
 
-  rates1->Print(Form("zone-%s_plot-vertex_r1_%s.jpg",  SZONE[3].c_str(),fn.c_str() ) );
+  //for(int z=0; z<NZONES; z++){
+  //  dc_ver[ENERGY][CONF][z][REG]->Draw("colz");
+  //  rates1->Print(Form("zone-%s_plot-vertex_r1_%s.jpg",  SZONE[z].c_str(),fn.c_str() ) );
+  //}
 }
 
 

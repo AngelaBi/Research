@@ -24,7 +24,7 @@
 	//string sconf[NCONF]  = { "clas12", "clas12VE", };
 	//double factor[NCONF] = {   1, 1};  // additional factor to scale the different configurations
 	const int NCONF      = 1;
-	string sconf[NCONF]  = { "clas12" };
+	string sconf[NCONF]  = { (fn).c_str() };
 	double factor[NCONF] = {   1};  // additional factor to scale the different configurations
 
       	
@@ -47,7 +47,8 @@
 		
 	// vertex locations
 	const int NZONES     = 4;
-	string SZONE[NZONES] = {"target", "beampipe", "torus", "all"};
+	//string SZONE[NZONES] = {"target", "beampipe", "torus", "all"};
+	string SZONE[NZONES] = {"target", "beampipe", "target-zoomed-out", "all"};
 	double zlimits[3][2][NZONES];  // r,z  --  min,max  --  zone
 	int ZONE = 0;
 	
@@ -64,26 +65,37 @@
 	const int NREG     = 3;
 	string sreg[NREG] = {"reg1", "reg2", "reg3"};
 	int REG = 0;
-	
+  //Factor to scale the occupancies according to the time windows	
+	//double factordatasimu[NREG] = {500./250.,1400./250.,1200./500   };  // additional factor to scale the different configurations
+	double factordatasimu[NREG] = {1,1,1};  // additional factor to scale the different configurations
 	// near target
 	zlimits[0][0][0] = -10;    zlimits[0][1][0] =  150;
 	zlimits[2][0][0] = -100;   zlimits[2][1][0] = 1000;
-	
+	//TEMP -100, 1000
 	// beampipe
 	zlimits[0][0][1] = -100;   zlimits[0][1][1] = 1400;
 	zlimits[2][0][1] = -100;   zlimits[2][1][1] = 1600;
 	
+  //seb-tony zone
+	zlimits[0][0][2] = -10;    zlimits[0][1][2] =  250;
+	zlimits[2][0][2] = -100;   zlimits[2][1][2] = 2900;
+
 	// torus
-	zlimits[0][0][2] = -200;    zlimits[0][1][2] = 1500;
-	zlimits[2][0][2] = 2500;   zlimits[2][1][2] = 6000;
+	//zlimits[0][0][2] = -200;    zlimits[0][1][2] = 1500;
+	//zlimits[2][0][2] = 2500;   zlimits[2][1][2] = 6000;
 	
 	// all
 	zlimits[0][0][3] = -100;   zlimits[0][1][3] = 2000;
 	zlimits[2][0][3] = -100;   zlimits[2][1][3] = 3000;
 	
 	
-	string PRINT = "";   // Print on Image File
-	
+	string PRINT = "jpg";   // Print on Image File
+  string imgdir="mkdir "+fn;
+  gSystem->Exec("rm img");
+  gSystem->Exec(imgdir.c_str());
+  string softlink="ln -s "+fn+" img";	
+  cout<<softlink<<endl;
+  gSystem->Exec(softlink.c_str());
 	// 2D occupancy histos: 2D for each sector, wire vs layer
 	TH2F *dc_pro[NSECT][NENERGY][NCONF];
 	TH2F *dc_occ[NSECT][NENERGY][NCONF];

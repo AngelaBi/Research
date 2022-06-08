@@ -141,30 +141,49 @@ void init_dc_histos(string filename, int cindex)
 				if(r==1) hitCutR = hitCut + " && layer > 12 && layer < 25";
 				if(r==2) hitCutR = hitCut + " && layer > 24 ";
 
-				// 2D vertex histos
-				for(int z=0; z<NZONES; z++)
-				{
-					string hist = Form("sqrt(vx*vx+vy*vy):vz >> dc_ver_E%s_%s_z%s_r%d", SEDEP[e].c_str(), sconf[cindex].c_str(), SZONE[z].c_str(), r+1);
-					
-					
-					dc->Draw(hist.c_str(), hitCutR.c_str());
-					dc_ver[e][cindex][z][r]->Scale(factor[cindex]/NHITS);
-					dc_ver[e][cindex][z][r]->SetDirectory(0);
-				}
-				// 1D vertex histos
-				for(int p=0; p<NPART; p++)
-				{
-					string hist = Form("vz >> dc_zver_E%s_%s_r%d_%s", SEDEP[e].c_str(), sconf[cindex].c_str(), r+1, SPART[p].c_str());
-					
-					string hitCutRP = hitCutR + " && " + pcut[p];
-					
-					cout << hitCutRP << endl;
-					
-					dc->Draw(hist.c_str(), hitCutRP.c_str());
-					dc_zver[e][cindex][r][p]->Scale(factor[cindex]/NHITS);
-					dc_zver[e][cindex][r][p]->SetDirectory(0);
-				}
-				
+// 2D vertex histos
+for(int z=0; z<NZONES; z++)
+{
+string hist = Form("sqrt(vx*vx+vy*vy):vz >> dc_ver_E%s_%s_z%s_r%d", SEDEP[e].c_str(), sconf[cindex].c_str(), SZONE[z].c_str(), r+1);
+dc->Draw(hist.c_str(), hitCutR.c_str());
+dc_ver[e][cindex][z][r]->Scale(factor[cindex]/NHITS);
+dc_ver[e][cindex][z][r]->SetDirectory(0);
+}
+// 1D vertex histos
+for(int p=0; p<NPART; p++)
+{
+string hist = Form("vz >> dc_zver_E%s_%s_r%d_%s", SEDEP[e].c_str(), sconf[cindex].c_str(), r+1, SPART[p].c_str());
+string hitCutRP = hitCutR + " && " + pcut[p];
+cout << hitCutRP << endl;
+dc->Draw(hist.c_str(), hitCutRP.c_str());
+dc_zver[e][cindex][r][p]->Scale(factor[cindex]/NHITS);
+dc_zver[e][cindex][r][p]->SetDirectory(0);
+}
+
+//				// 2D vertex histos
+//				for(int z=0; z<NZONES; z++)
+//				{
+//					string hist = Form("sqrt(vx*vx+vy*vy):vz >> dc_ver_E%s_%s_z%s_r%d", SEDEP[e].c_str(), sconf[cindex].c_str(), SZONE[z].c_str(), r+1);
+//					
+//					
+//					dc->Draw(hist.c_str(), hitCutR.c_str());
+//					dc_ver[e][cindex][z][r]->Scale(factor[cindex]/NHITS);
+//					dc_ver[e][cindex][z][r]->SetDirectory(0);
+//				}
+//				// 1D vertex histos
+//				for(int p=0; p<NPART; p++)
+//				{
+//					string hist = Form("vz >> dc_zver_E%s_%s_r%d_%s", SEDEP[e].c_str(), sconf[cindex].c_str(), r+1, SPART[p].c_str());
+//					
+//					string hitCutRP = hitCutR + " && " + pcut[p];
+//					
+//					cout << hitCutRP << endl;
+//					
+//					dc->Draw(hist.c_str(), hitCutRP.c_str());
+//					dc_zver[e][cindex][r][p]->Scale(factor[cindex]/NHITS);
+//					dc_zver[e][cindex][r][p]->SetDirectory(0);
+//				}
+//				
 			}
 			
 			// 1D summary occupancy histo for the 3 regions
@@ -177,7 +196,7 @@ void init_dc_histos(string filename, int cindex)
 				string histSum   = Form("sector - 0.5 >> dc_occ_summary_r%d_E%s_%s", r+1, SEDEP[e].c_str(), sconf[cindex].c_str());
 				dc->Draw(histSum.c_str(), allCuts.c_str());
 				dc_occ_summary[r][e][cindex]->Sumw2();
-				dc_occ_summary[r][e][cindex]->Scale(100*factor[cindex]*(TWINDOWR[r]/TWINDOW)/(NHITS*nwires*nlayers));
+				dc_occ_summary[r][e][cindex]->Scale(100*factor[cindex]*factordatasimu[r]*(TWINDOWR[r]/TWINDOW)/(NHITS*nwires*nlayers));
 				dc_occ_summary[r][e][cindex]->SetDirectory(0);
 			}
 
@@ -241,7 +260,7 @@ void init_dc_histos(string filename, int cindex)
 
 
 		// writing out to file1
-		string ofname =   sconf[cindex] + ".root";
+		string ofname =   sconf[cindex] + "_results.root";
 		cout << " Opening file for writing: " << ofname << endl;
 		TFile of(ofname.c_str(), "RECREATE");
 		for(int e=0; e<NENERGY; e++)
